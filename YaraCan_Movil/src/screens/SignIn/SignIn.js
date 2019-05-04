@@ -1,9 +1,9 @@
 import React from 'react';
 import { View, Text, ImageBackground, TouchableOpacity,ToastAndroid,KeyboardAvoidingView} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import { Fumi } from 'react-native-textinput-effects';
+import { Fumi, Hoshi } from 'react-native-textinput-effects';
 
-import imgBackground from '../../assets/img/sala-cine.jpg'
+import imgBackground from '../../assets/img/perritos.jpg'
 import Icon from 'react-native-ionicons';
 import axios from '../../lib/axios';
 import AsyncStorage from '@react-native-community/async-storage';
@@ -91,8 +91,9 @@ export default class SignInScreen extends React.Component{
                 <View style={{padding:10}}>
                     <View style={{marginTop:10}}>
                         <View>
-                        <Fumi style={{
-                            backgroundColor: '#46494f',
+                        <Hoshi style={{
+                            width: '100%',
+                            backgroundColor: '#ffa138',
                             opacity: 0.8,
                             marginBottom: 10
                             }}
@@ -110,9 +111,9 @@ export default class SignInScreen extends React.Component{
                         />
                         </View>
                         <View style={{flexDirection:'row'}}>
-                        <Fumi style={{
-                            width: '82%',
-                            backgroundColor: '#46494f',
+                        <Hoshi style={{
+                            width: '82.5%',
+                            backgroundColor: '#ffa138',
                             opacity: 0.8
                             }}
                             label={'Contraseña'}
@@ -133,7 +134,7 @@ export default class SignInScreen extends React.Component{
                             style={{
                                 padding: 20,
                                 alignItems: 'center',
-                                backgroundColor: '#46494f',
+                                backgroundColor: '#ffa138',
                                 opacity: 0.8,
                                 height: 65
                             }}

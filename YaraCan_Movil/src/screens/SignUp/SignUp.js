@@ -17,7 +17,7 @@ export default class SignInScreen extends React.Component{
     render(){
         return(
             <View>
-                <Button title="Inicie Sesion!" onPress={this._signInAsync}/>
+                <Button title="Proando" onPress={this._signInAsync}/>
             </View>
             )
     }

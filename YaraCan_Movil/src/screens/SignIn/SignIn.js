@@ -9,7 +9,6 @@ import axios from '../../lib/axios';
 import AsyncStorage from '@react-native-community/async-storage';
 //import console = require('console');
 
-
 export default class SignInScreen extends React.Component{
     static navigationOptions = {
         title: 'Inicie sesion',
@@ -22,7 +21,7 @@ export default class SignInScreen extends React.Component{
         password: '',
         loading: false,
         showPassword: false
-    };
+    };//Variables globales de la app
     showPassword = () =>{
         this.setState({ showPassword: !this.state.showPassword});
     }
@@ -42,7 +41,7 @@ export default class SignInScreen extends React.Component{
             method: 'POST',
             url: 'api/user/signin',
             data:{
-                usernmae:this.state.user,
+                username:this.state.user,
                 password: this.state.password
             }
         })
@@ -66,8 +65,11 @@ export default class SignInScreen extends React.Component{
             });
     };
     registerHandler = () =>{
-        this.props.navigationOptions('SignUp');
+        this.props.navigation.navigate('SignUp');//para cambiar de vista
     }
+
+
+    //Todo lo que esta arrbia son funciones -> jose
     render(){
         return(
             <View style={{flex: 1}}>

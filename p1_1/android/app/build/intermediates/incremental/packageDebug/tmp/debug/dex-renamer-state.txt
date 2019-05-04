@@ -1,0 +1,4 @@
+#Sat May 04 11:31:55 COT 2019
+base.0=E\:\\Proyecto_final\\proyectoIGITHUB\\yaracan2.0\\p1_1\\android\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\0
+path.0=classes.dex
+renamed.0=classes.dex

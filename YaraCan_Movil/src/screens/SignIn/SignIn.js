@@ -87,7 +87,7 @@ export default class SignInScreen extends React.Component{
                         fontSize: 48,
                         color: '#fff'
                     }}
-                >Tecsup Videos</Text>
+                >Yara Can</Text>
                 <View style={{padding:10}}>
                     <View style={{marginTop:10}}>
                         <View>

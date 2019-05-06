@@ -39,7 +39,7 @@ export default class SignInScreen extends React.Component{
         this.setState({ loading:true});
         axios({
             method: 'POST',
-            url: 'api/user/signin',
+            url: '/api/user/signin',
             data:{
                 username:this.state.user,
                 password: this.state.password
@@ -51,12 +51,13 @@ export default class SignInScreen extends React.Component{
                     ToastAndroid.LONG,
                     ToastAndroid.TOP
                 );
+                this.props.navigation.navigate('Home');
                 await AsyncStorage.setItem('userToken', response.data.token);
-                this.props.navigationOptions.navigationOptions('App');
+                
             })
             .catch(err => {
                 ToastAndroid.showWithGravity(
-                    'Hubo un error en el registro',
+                    'Hubo un error en el logeo',
                     ToastAndroid.LONG,
                     ToastAndroid.TOP
                 );

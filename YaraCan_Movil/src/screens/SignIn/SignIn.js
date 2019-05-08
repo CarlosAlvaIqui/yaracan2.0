@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text, ImageBackground, TouchableOpacity,ToastAndroid,KeyboardAvoidingView} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { Fumi, Hoshi } from 'react-native-textinput-effects';
+import AwesomeButton from "react-native-really-awesome-button";
 
 import imgBackground from '../../assets/img/perritos.jpg'
 import Icon from 'react-native-ionicons';
@@ -36,6 +37,8 @@ export default class SignInScreen extends React.Component{
                 ToastAndroid.TOP
             );
         }
+        
+      
         this.setState({ loading:true});
         axios({
             method: 'POST',
@@ -68,12 +71,14 @@ export default class SignInScreen extends React.Component{
     registerHandler = () =>{
         this.props.navigation.navigate('SignUp');//para cambiar de vista
     }
-
-
+    envioaotrapagina = () =>{
+        this.props.navigation.navigate('SignUp');
+        }
+   //gaaaaa
     //Todo lo que esta arrbia son funciones -> jose
     render(){
         return(
-            <View style={{flex: 1}}>
+            <View style={{flex: 1}}>  
                 <ImageBackground
                     source = {imgBackground}
                     style={{width: '100%', height: '100%'}}
@@ -154,19 +159,32 @@ export default class SignInScreen extends React.Component{
                                 justifyContent: 'center',
                                 alignItems:'center',
                                 borderRadius: 25,
-                                backgroundColor: '#dcdcdc'
+                                backgroundColor: '#dcdcdc',
                             }}
                         >
                         <Text
                             style={{
                                 color: '#46494f',
                                 fontSize: 15,
-                                fontWeight: 'bold'
+                                fontWeight: 'bold',
                             }}>
                         Iniciar Sesión
                         </Text>
-
                         </TouchableOpacity>
+                        
+                        <AwesomeButton onPress={this.envioaotrapagina}
+                            style={{
+                                marginTop: 20,
+                                padding: 15,
+                                justifyContent: 'center',
+                                alignItems:'center',
+                                borderRadius: 25,
+                            }}><Text style={{
+                                color: 'white',
+                                fontSize: 15,
+                                fontWeight: 'bold',
+                            }}>Ir a otra pagina</Text></AwesomeButton>
+                        
                         <View
                             style={{
                                 marginTop:10,

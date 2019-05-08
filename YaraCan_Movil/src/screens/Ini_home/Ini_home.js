@@ -1,15 +1,13 @@
 import React from 'react';
-import { StyleSheet,View, Button, Text, ImageBackground, TouchableOpacity,ToastAndroid,KeyboardAvoidingView,Image} from 'react-native';
+import { View, Button, Text, ImageBackground, TouchableOpacity,ToastAndroid,KeyboardAvoidingView} from 'react-native';
 import { Fumi } from 'react-native-textinput-effects';
 import Icon from 'react-native-ionicons';
 import { Hoshi } from 'react-native-textinput-effects';
-import AwesomeButton from "react-native-really-awesome-button";
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import AsyncStorage from '@react-native-community/async-storage';
-import imgBackground from '../../assets/img/perritos.jpg';
-import bk from '../../assets/img/dragoncito.jpg';
-import axios from 'axios';
+import imgBackground from '../../assets/img/perritos.jpg'
 
+import axios from 'axios';
 
 export default class SignUp extends React.Component{
     static navigationOptions = {
@@ -77,15 +75,6 @@ export default class SignUp extends React.Component{
         await AsyncStorage.clear();
         this.props.navigation.navigate('Auth');
     };
-    cambiaotro = () =>{
-        this.props.navigation.navigate('home_botones');
-        };
-     envioaotrapagina = () =>{
-            this.props.navigation.navigate('SignUp');
-            };
-    //codigo de chullo no BORRAR 
-    // este es tu codigo  chullito desde la linea 86 hasta 210
-    /* 
     render(){
         return(
             <View style={{flex: 1}}>
@@ -205,139 +194,10 @@ export default class SignUp extends React.Component{
 
                         </TouchableOpacity>
                     
-                   </View>
+                    </View>
                 </View>
                 </ImageBackground>
             </View>  
         );
-    }*/ 
-/////////////////////////////////////////////////////////////////////
-
-//CODIGO CAR EN PROCESO 
-/*
- <View style={{flex: 1}}>
-            <ImageBackground
-                source = {imgBackground}
-                style={{width: '100%', height: '100%'}}
-                >
-            <View style={styles.top}>
-            <Text style={{fontSize: 50, color:'white'}}> Yara Can</Text>
-                    <View style={styles.profileimage}></View>
-            </View>
-            <View style={styles.center}></View>
-
-            <View style={styles.bottom}>
-
-                <View onPress={this.cambiaotro} style={styles.bottomItem}>
-                    <View style={styles.bottomItemInner}>
-                    <Image source={bk}></Image>
-                    <Text  style={styles.botoncolor}>Adopcion</Text>
-                    </View>
-                </View>
-
-               
-
-            </View>
-            
-            </ImageBackground>
-        </View>  
-*/
-render(){
-    return(
-        <View style={{flex: 1}}>
-            <ImageBackground
-                source = {imgBackground}
-                style={{width: '100%', height: '100%'}}
-                >
-            <View style={styles.top}>
-            <Text style={{fontSize: 50, color:'white'}}> Yara Can</Text>
-                    <View style={styles.profileimage}></View>
-            </View>
-            <View style={styles.center}></View>
-
-            <View style={styles.bottom}>
-
-                <View style={styles.bottomItem}>
-                    <View style={styles.bottomItemInner}>
-                  <AwesomeButton onPress={this.cambiaotro}>
-                      <Text>Adopcion</Text>
-                  </AwesomeButton>
-                    </View>
-                </View>
-
-                <View style={styles.bottomItem}>
-                    <View style={styles.bottomItemInner}>
-                    <AwesomeButton onPress={this.cambiaotro}>
-                      <Text>Reportes</Text>
-                  </AwesomeButton>
-                    </View>
-                </View>
-
-                <View style={styles.bottomItem}>
-                    <View style={styles.bottomItemInner}>
-                    <AwesomeButton onPress={this.envioaotrapagina}>
-                      <Text>Eventos</Text>
-                  </AwesomeButton>
-                    </View>
-                </View>
-
-                <View style={styles.bottomItem}>
-                    <View style={styles.bottomItemInner}>
-                    <AwesomeButton onPress={this.envioaotrapagina}>
-                      <Text>Lugares</Text>
-                  </AwesomeButton>
-                    </View>
-                </View>
-
-                <View style={styles.bottomItem}>
-                    <View style={styles.bottomItemInner}>
-                    <AwesomeButton onPress={this.envioaotrapagina}>
-                      <Text>Noticias</Text>
-                  </AwesomeButton>
-                    </View>
-                </View>
-
-                <View style={styles.bottomItem}>
-                    <View style={styles.bottomItemInner}>
-                    <AwesomeButton>
-                      <Text>Albergues</Text>
-                  </AwesomeButton>
-                    </View>
-                </View>
-
-            </View>
-            
-            </ImageBackground>
-        </View>  
-    );
-
+    }
 }
-}
-
-const styles = StyleSheet.create({
-top: {
-    height: '15%',
-    alignItems: 'center',
-    justifyContent: 'center',
-},
-bottom: {
-    height: '45%',
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    padding: 5,
-},
-bottomItem: {
-    width: '50%',
-    height: '50%',
-    padding: 5,
-},
-bottomItemInner: {
-    flex: 1,
-    opacity: 0.80,
-    justifyContent: 'center',
-    alignItems:'center',
-},
-botoncolor:{
-    color: 'white',
-}
-});

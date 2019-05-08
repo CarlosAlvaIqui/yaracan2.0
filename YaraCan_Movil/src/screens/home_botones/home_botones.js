@@ -78,11 +78,8 @@ export default class SignUp extends React.Component{
         this.props.navigation.navigate('Auth');
     };
     cambiaotro = () =>{
-        this.props.navigation.navigate('home_botones');
+        this.props.navigation.navigate('SignIn');
         };
-     envioaotrapagina = () =>{
-            this.props.navigation.navigate('SignUp');
-            };
     //codigo de chullo no BORRAR 
     // este es tu codigo  chullito desde la linea 86 hasta 210
     /* 
@@ -257,17 +254,17 @@ render(){
 
             <View style={styles.bottom}>
 
-                <View style={styles.bottomItem}>
+                <View onPress={this.cambiaotro} style={styles.bottomItem}>
                     <View style={styles.bottomItemInner}>
-                  <AwesomeButton onPress={this.cambiaotro}>
-                      <Text>Adopcion</Text>
+                  <AwesomeButton>
+                      <Text>Adopciones</Text>
                   </AwesomeButton>
                     </View>
                 </View>
 
                 <View style={styles.bottomItem}>
                     <View style={styles.bottomItemInner}>
-                    <AwesomeButton onPress={this.cambiaotro}>
+                    <AwesomeButton>
                       <Text>Reportes</Text>
                   </AwesomeButton>
                     </View>
@@ -275,7 +272,7 @@ render(){
 
                 <View style={styles.bottomItem}>
                     <View style={styles.bottomItemInner}>
-                    <AwesomeButton onPress={this.envioaotrapagina}>
+                    <AwesomeButton>
                       <Text>Eventos</Text>
                   </AwesomeButton>
                     </View>
@@ -283,7 +280,7 @@ render(){
 
                 <View style={styles.bottomItem}>
                     <View style={styles.bottomItemInner}>
-                    <AwesomeButton onPress={this.envioaotrapagina}>
+                    <AwesomeButton>
                       <Text>Lugares</Text>
                   </AwesomeButton>
                     </View>
@@ -291,7 +288,7 @@ render(){
 
                 <View style={styles.bottomItem}>
                     <View style={styles.bottomItemInner}>
-                    <AwesomeButton onPress={this.envioaotrapagina}>
+                    <AwesomeButton>
                       <Text>Noticias</Text>
                   </AwesomeButton>
                     </View>

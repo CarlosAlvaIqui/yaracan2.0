@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet,View, Button, Text, ImageBackground, TouchableOpacity,ToastAndroid,KeyboardAvoidingView,Image} from 'react-native';
+import { StyleSheet,View, Button, Text, ImageBackground, TouchableOpacity,ToastAndroid,KeyboardAvoidingView,Image,FlatList,AppRegistry} from 'react-native';
 import { Fumi } from 'react-native-textinput-effects';
 import Icon from 'react-native-ionicons';
 import { Hoshi } from 'react-native-textinput-effects';
@@ -8,6 +8,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import AsyncStorage from '@react-native-community/async-storage';
 import imgBackground from '../../assets/img/perritos.jpg';
 import bk from '../../assets/img/dragoncito.jpg';
+import arcjson from '../../archivos_json/json_files/jsonfile_1.json';
 import axios from 'axios';
 
 
@@ -85,7 +86,7 @@ export default class SignUp extends React.Component{
             };
     //codigo de chullo no BORRAR 
     // este es tu codigo  chullito desde la linea 86 hasta 210
-    /* 
+    /
     render(){
         return(
             <View style={{flex: 1}}>
@@ -210,7 +211,7 @@ export default class SignUp extends React.Component{
                 </ImageBackground>
             </View>  
         );
-    }*/ 
+    }
 /////////////////////////////////////////////////////////////////////
 
 //CODIGO CAR EN PROCESO 
@@ -241,7 +242,7 @@ export default class SignUp extends React.Component{
             
             </ImageBackground>
         </View>  
-*/
+*//*
 render(){
     return(
         <View style={{flex: 1}}>
@@ -311,10 +312,76 @@ render(){
         </View>  
     );
 
+}/*
+constructor(){
+    super()
+    this.state = {
+        dataSource: []
+    }
 }
+renderItem = ({ item }) => {
+    return (<View>
+        <Image style={{ width: 100, height:100}}
+        source={{ uri: item.picture }}
+        />
+        <View>
+            <Text>
+                {item.name}
+            </Text>
+        </View>
+    </View>)
+    
+}
+
+componentDidMount(){
+    const urlj = arcjson
+    fetch(urlj)
+    .then((response) => response.json())
+    .then((responseJson) => {
+            this.setState({
+                dataSource: responseJson.datos_array
+            })
+    })
+    .catch((error) => {
+        console.log(error)
+    })
+}
+render(){
+    return(
+        <View style={{flex: 1}}>
+            <ImageBackground
+                source = {imgBackground}
+                style={{width: '100%', height: '100%'}}
+                >
+
+                <View style={styles.containerflat}>
+
+                <FlatList
+                data={this.state.dataSource}
+                renderItem={this.renderItem}
+                />
+                  
+                </View>
+
+            </ImageBackground>
+        </View>  
+    );
+
+}
+*/
+
+
 }
 
 const styles = StyleSheet.create({
+
+containerflat:{
+justifyContent: 'center',
+alignItems: 'center',
+},
+
+
+
 top: {
     height: '15%',
     alignItems: 'center',

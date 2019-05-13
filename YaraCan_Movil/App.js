@@ -16,13 +16,17 @@ import {
 import AuthLoadingScreen from './src/screens/AuthLoadingScreen/AuthLoadingScreen';
 import SignInScreen from './src/screens/SignIn/SignIn';
 import SignUpScreen from './src/screens/SignUp/SignUp';
+import ini_home from './src/screens/Ini_home/Ini_home';
+import Publicaciones_ls from './src/screens/Publicaciones_ls/Publicaciones_ls';
 import HomeScreen from './src/screens/Home/Home';
 import ChatScreen from './src/screens/Chat/Chat';
 
 const AppStack = createDrawerNavigator({ Home: HomeScreen, Other: ChatScreen});
+
+
 const AuthStack = createBottomTabNavigator({
-  Sign: SignInScreen,
-  SignUp: SignUpScreen
+  SignIn: SignInScreen,
+  SignUp: SignUpScreen,
 });
 export default createAppContainer(
   createSwitchNavigator(

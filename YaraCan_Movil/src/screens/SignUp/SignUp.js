@@ -82,11 +82,11 @@ export default class SignUp extends React.Component{
         this.props.navigation.navigate('home_botones');
         };
      envioaotrapagina = () =>{
-            this.props.navigation.navigate('SignUp');
+            this.props.navigation.navigate('SignIn');
             };
     //codigo de chullo no BORRAR 
     // este es tu codigo  chullito desde la linea 86 hasta 210
-    /
+    
     render(){
         return(
             <View style={{flex: 1}}>
@@ -205,7 +205,11 @@ export default class SignUp extends React.Component{
                         </Text>
 
                         </TouchableOpacity>
-                    
+                    <AwesomeButton onPress={this.envioaotrapagina}>
+                        <Text>
+                            gaaa
+                        </Text>
+                    </AwesomeButton>
                    </View>
                 </View>
                 </ImageBackground>

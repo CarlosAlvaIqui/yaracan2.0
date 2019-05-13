@@ -72,7 +72,7 @@ export default class SignInScreen extends React.Component{
         this.props.navigation.navigate('SignUp');//para cambiar de vista
     }
     envioaotrapagina = () =>{
-        this.props.navigation.navigate('SignUp');
+        this.props.navigation.navigate('Home');
         }
    //gaaaaa
     //Todo lo que esta arrbia son funciones -> jose

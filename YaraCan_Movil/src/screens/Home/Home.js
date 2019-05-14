@@ -90,7 +90,6 @@ export default class HomeScreen extends React.Component {
 	};
 	change_viewAdopcion = () => {
 		this.props.navigation.navigate('ViewAdopcion');
-		alert('oa');
 	};
 	envioaotrapagina = () => {
 		this.props.navigation.navigate('SignUp');

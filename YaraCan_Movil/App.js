@@ -22,21 +22,13 @@ import HomeScreen from './src/screens/Home/Home';
 import ChatScreen from './src/screens/Chat/Chat';
 import ViewAdopcionScreen from './src/screens/ViewAdopcion/ViewAdopcion';
 
-<<<<<<< HEAD
-const AppStack = createDrawerNavigator({ Home: HomeScreen, Other: ChatScreen});
-
-
-const AuthStack = createBottomTabNavigator({
-  SignIn: SignInScreen,
-  SignUp: SignUpScreen,
-=======
 const AppStack = createDrawerNavigator({ Home: HomeScreen, Other: ChatScreen });
 const AuthStack = createBottomTabNavigator({
 	Sign: SignInScreen,
 	SignUp: SignUpScreen,
 	Home: HomeScreen,
-	ViewAdopcion: ViewAdopcionScreen
->>>>>>> 65ab6d50f3bf95ae79fd20cd141ec4a03b8a32fe
+	ViewAdopcion: ViewAdopcionScreen,
+	
 });
 export default createAppContainer(
 	createSwitchNavigator(

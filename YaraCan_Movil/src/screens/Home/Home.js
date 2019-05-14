@@ -22,39 +22,41 @@ import imgBackground from '../../assets/img/perritos.jpg';
 import bk from '../../assets/img/dragoncito.jpg';
 import arcjson from '../../archivos_json/json_files/jsonfile_1.json';
 import axios from 'axios';
-import ViewAdopcionScreen from '../ViewAdopcion/ViewAdopcion';
-export default class HomeScreen extends React.Component {
-	static navigationOptions = {
-		title: 'Bienvenido a la App!',
-		tabBarIcon: ({ focused, horizontal, tintColor }) => {
-			return <Ionicons name="ios-clipboard" size={25} color={tintColor} />;
-		}
-	};
-	state = {
-		username: '',
-		password: '',
-		loading: false,
-		showPassword: false,
-		email: ''
-	};
-	showPassword = () => {
-		this.setState({ showPassword: !this.state.showPassword });
-	};
-	inputHandler = (field, value) => {
-		this.setState({ [field]: value });
-	};
-	_scrollToInput = () => {
-		const scrollResponder = this.refs.myScrollView.getScrollResponder();
-		const inputHandle = React.findNodeHandle(this.refs.myInput);
 
-		scrollResponder.scrollResponderScrollNativeHandleToKeyboard(
-			inputHandle, // The TextInput node handle
-			0, // The scroll view's bottom "contentInset" (default 0)
-			true // Prevent negative scrolling
-		);
-	};
-	onSubmitHandler = () => {
-		/*if(this.state.user === '' || this.state.password === ''){
+
+
+export default class Home extends React.Component{
+    static navigationOptions = {
+        title: 'Bienvenido a la App!',
+        tabBarIcon:({ focused, horizontal, tintColor})=> {
+            return <Ionicons name="ios-clipboard" size={25} color={tintColor} />
+        }
+    };
+    state ={
+        username: '',
+        password: '',
+        loading: false,
+        showPassword: false,
+        email:''
+    };
+    showPassword = () =>{
+        this.setState({ showPassword: !this.state.showPassword});
+    }
+    inputHandler = (field,value) =>{
+        this.setState({[field]:value})
+    }
+    _scrollToInput = () => {
+        const scrollResponder = this.refs.myScrollView.getScrollResponder();
+        const inputHandle = React.findNodeHandle(this.refs.myInput)
+      
+        scrollResponder.scrollResponderScrollNativeHandleToKeyboard(
+          inputHandle, // The TextInput node handle
+          0, // The scroll view's bottom "contentInset" (default 0)
+          true // Prevent negative scrolling
+        );
+      }
+    onSubmitHandler = () =>{
+        /*if(this.state.user === '' || this.state.password === ''){
             return ToastAndroid.showWithGravity(
                 'Falta ingresar datos!',
                 ToastAndroid.SHORT,
@@ -62,6 +64,7 @@ export default class HomeScreen extends React.Component {
             );
         }
     */
+<<<<<<< HEAD
 		this.setState({ loading: true });
 		axios({
 			method: 'POST',
@@ -188,46 +191,50 @@ export default class HomeScreen extends React.Component {
                             iconClass={Icon}
                             iconName={'key'}
                             iconColor={'#fff'}
+=======
+        this.setState({ loading:true});
+        axios({
+            method: 'POST',
+            url: 'http://192.168.43.168:8080/api/user/signup',
+            data:{
+                username: this.state.username,
+                password: this.state.password,
+                email: this.state.email
+            }
+        })
+            .catch(err => {
+                ToastAndroid.showWithGravity(
+                    'Hubo un problema con el registro',
+                    ToastAndroid.LONG,
+                    ToastAndroid.TOP
+                );
+                console.warn(err);
+                this.setState({loading:false});
+            });
+    };
+    _showMoreApp = () => {
+        this.props.navigation.navigate('chat');
+    };
+    _signOutAsync = async () => {
+        await AsyncStorage.clear();
+        this.props.navigation.navigate('Auth');
+    };
+    cambiaotro = () =>{
+        this.props.navigation.navigate('SignIn');
+        };
+     envioaotrapagina = () =>{
+            this.props.navigation.navigate('SignUp');
+            };
+    listapage = () =>{
+            this.props.navigation.navigate('Publicaciones_ls');
+            };
+   
+>>>>>>> 44b2bed033f8d01c89715f25c6e453d4fb49f5e3
 
-                            iconSize={30}
-                            iconWidth={40}
-                            inputPadding={16}
-                        />
-                       </View>
-                        <TouchableOpacity
-                            onPress={this.onSubmitHandler}
-                            style={{
-                                marginTop: 10,
-                                padding: 15,
-                                justifyContent: 'center',
-                                alignItems:'center',
-                                borderRadius: 25,
-                                backgroundColor: '#dcdcdc'
-                            }}
-                        >
-                        <Text
-                            style={{
-                                color: '#46494f',
-                                fontSize: 15,
-                                fontWeight: 'bold'
-                            }}>
-                        Registrarse
-                        </Text>
 
-                        </TouchableOpacity>
-                    
-                   </View>
-                </View>
-                </ImageBackground>
-            </View>  
-        );
-    }*/
-
-	/////////////////////////////////////////////////////////////////////
-
-	//CODIGO CAR EN PROCESO
-	/*
- <View style={{flex: 1}}>
+render(){
+    return(
+        <View style={{flex: 1}}>
             <ImageBackground
                 source = {imgBackground}
                 style={{width: '100%', height: '100%'}}
@@ -240,143 +247,61 @@ export default class HomeScreen extends React.Component {
 
             <View style={styles.bottom}>
 
-                <View onPress={this.cambiaotro} style={styles.bottomItem}>
+                <View style={styles.bottomItem}>
                     <View style={styles.bottomItemInner}>
-                    <Image source={bk}></Image>
-                    <Text  style={styles.botoncolor}>Adopcion</Text>
+                  <AwesomeButton onPress={this.cambiaotro}>
+                      <Text>Adopciones</Text>
+                  </AwesomeButton>
                     </View>
                 </View>
 
-               
+                <View style={styles.bottomItem}>
+                    <View style={styles.bottomItemInner}>
+                    <AwesomeButton onPress={this.cambiaotro}>
+                      <Text>Reportes</Text>
+                  </AwesomeButton>
+                    </View>
+                </View>
+
+                <View style={styles.bottomItem}>
+                    <View style={styles.bottomItemInner}>
+                    <AwesomeButton onPress={this.envioaotrapagina}>
+                      <Text>Eventos</Text>
+                  </AwesomeButton>
+                    </View>
+                </View>
+
+                <View style={styles.bottomItem}>
+                    <View style={styles.bottomItemInner}>
+                    <AwesomeButton onPress={this.envioaotrapagina}>
+                      <Text>Lugares</Text>
+                  </AwesomeButton>
+                    </View>
+                </View>
+
+                <View style={styles.bottomItem}>
+                    <View style={styles.bottomItemInner}>
+                    <AwesomeButton onPress={this.listapage}>
+                      <Text>Noticias</Text>
+                  </AwesomeButton>
+                    </View>
+                </View>
+
+                <View style={styles.bottomItem}>
+                    <View style={styles.bottomItemInner}>
+                    <AwesomeButton onPress={this.listapage}>
+                      <Text>Albergues</Text>
+                  </AwesomeButton>
+                    </View>
+                </View>
 
             </View>
             
             </ImageBackground>
         </View>  
-*/
-	render() {
-		const { navigate } = this.props.navigation;
-		return (
-			<View style={{ flex: 1 }}>
-				<ImageBackground
-					source={imgBackground}
-					style={{ width: '100%', height: '100%' }}
-				>
-					<View style={styles.top}>
-						<Text style={{ fontSize: 50, color: 'white' }}> Yara Can</Text>
-						<View style={styles.profileimage} />
-					</View>
-					<View style={styles.center} />
-
-					<View style={styles.bottom}>
-						<View style={styles.bottomItem}>
-							<View style={styles.bottomItemInner}>
-								<AwesomeButton onPress={this.change_viewAdopcion}>
-									<Text>Adopcion</Text>
-								</AwesomeButton>
-							</View>
-						</View>
-
-						<View style={styles.bottomItem}>
-							<View style={styles.bottomItemInner}>
-								<AwesomeButton onPress={this.cambiaotro}>
-									<Text>Reportes</Text>
-								</AwesomeButton>
-							</View>
-						</View>
-
-						<View style={styles.bottomItem}>
-							<View style={styles.bottomItemInner}>
-								<AwesomeButton onPress={this.envioaotrapagina}>
-									<Text>Eventos</Text>
-								</AwesomeButton>
-							</View>
-						</View>
-
-						<View style={styles.bottomItem}>
-							<View style={styles.bottomItemInner}>
-								<AwesomeButton onPress={this.envioaotrapagina}>
-									<Text>Lugares</Text>
-								</AwesomeButton>
-							</View>
-						</View>
-
-						<View style={styles.bottomItem}>
-							<View style={styles.bottomItemInner}>
-								<AwesomeButton onPress={this.envioaotrapagina}>
-									<Text>Noticias</Text>
-								</AwesomeButton>
-							</View>
-						</View>
-
-						<View style={styles.bottomItem}>
-							<View style={styles.bottomItemInner}>
-								<AwesomeButton>
-									<Text>Albergues</Text>
-								</AwesomeButton>
-							</View>
-						</View>
-					</View>
-				</ImageBackground>
-			</View>
-		);
-	} /*
-constructor(){
-    super()
-    this.state = {
-        dataSource: []
-    }
-}
-renderItem = ({ item }) => {
-    return (<View>
-        <Image style={{ width: 100, height:100}}
-        source={{ uri: item.picture }}
-        />
-        <View>
-            <Text>
-                {item.name}
-            </Text>
-        </View>
-    </View>)
-    
-}
-
-componentDidMount(){
-    const urlj = arcjson
-    fetch(urlj)
-    .then((response) => response.json())
-    .then((responseJson) => {
-            this.setState({
-                dataSource: responseJson.datos_array
-            })
-    })
-    .catch((error) => {
-        console.log(error)
-    })
-}
-render(){
-    return(
-        <View style={{flex: 1}}>
-            <ImageBackground
-                source = {imgBackground}
-                style={{width: '100%', height: '100%'}}
-                >
-
-                <View style={styles.containerflat}>
-
-                <FlatList
-                data={this.state.dataSource}
-                renderItem={this.renderItem}
-                />
-                  
-                </View>
-
-            </ImageBackground>
-        </View>  
     );
 
 }
-*/
 }
 
 const styles = StyleSheet.create({

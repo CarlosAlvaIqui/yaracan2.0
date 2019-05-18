@@ -37,11 +37,11 @@ export default class SignUp extends React.Component {
 	};
 
 	state = {
-		username: '',
-		password: '',
+		petname: '',
+        sexo: '',
+        raza:'',
+        descripcion:'',
 		loading: false,
-		showPassword: false,
-		email: ''
 	};
 
 	showPassword = () => {
@@ -137,8 +137,7 @@ export default class SignUp extends React.Component {
                             iconSize={30}
                             iconWidth={40}
                             inputPadding={16}
-                            onChangeText={text => this.inputHandler('username',text)}
-                            value={this.state.username}
+                            value={this.state.petname}
                         />
                         <Madoka style={{
                             width: '100%',
@@ -153,8 +152,7 @@ export default class SignUp extends React.Component {
                             iconSize={30}
                             iconWidth={40}
                             inputPadding={16}
-                            onChangeText={text => this.inputHandler('email',text)}
-                            value={this.state.email}
+                            value={this.state.sexo}
                         />
                      
                         </View>
@@ -165,7 +163,6 @@ export default class SignUp extends React.Component {
                             }}
                             label={'Raza'}
                             labelStyle={{color: 'white'}}
-                            onChangeText={text => this.inputHandler('password',text)}
                            
                             iconClass={Icon}
                             iconName={'key'}
@@ -173,6 +170,8 @@ export default class SignUp extends React.Component {
                             iconSize={30}
                             iconWidth={40}
                             inputPadding={16}
+                            value={this.state.raza}
+
                         />
                         
                        </View>
@@ -185,7 +184,6 @@ export default class SignUp extends React.Component {
                             }}
                             label={'Descripcion'}
                             labelStyle={{color: 'white'}}
-                            onChangeText={text => this.inputHandler('password',text)}
                    
                             iconClass={Icon}
                             iconName={'key'}
@@ -194,6 +192,8 @@ export default class SignUp extends React.Component {
                             iconSize={30}
                             iconWidth={40}
                             inputPadding={16}
+                            value={this.state.descripcion}
+
                         />
                        </View>
                         <TouchableOpacity

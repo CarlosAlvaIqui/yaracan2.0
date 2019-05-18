@@ -17,10 +17,10 @@ import axios from 'axios';
 
 export default class ViewAdopcionScreen extends React.Component {
 	state = {
-		nombre: '',
+		namepet: '',
 		raza: '',
 		sexo: '',
-		historia: ''
+		descripcion: ''
 	};
 	inputHandler = (field, value) => {
 		this.setState({ [field]: value });

@@ -1,14 +1,15 @@
 const utils = require('../lib/utils');
-const User = require('../models/user');
+const Pet = require('../models/pets');
 
-const exposedFields = ['username', 'name', 'email'];
+const exposedFields = ['petname', 'sexo', 'raza', 'descripcion'];
 
 module.exports = {
-	signup: (req, res, next) => {
-		var user = new User({
+	//
+	/*signup: (req, res, next) => {
+		var pet = new Pet({
 			...req.body
 		});
-		user
+		pet
 			.save()
 			.then(result => {
 				const token = utils.generateToken({
@@ -63,7 +64,8 @@ module.exports = {
 						res.status(500).json(err);
 					});
 			});
-	},
+    },
+  
 	refreshToken: (req, res, next) => {
 		var token = req.body.token || req.query.token;
 		if (!token) {
@@ -113,16 +115,18 @@ module.exports = {
 					error: err
 				});
 			});
-	},
+    },    
+*/
+
 	create: (req, res, next) => {
-		var user = new User({
+		var pet = new Pet({
 			...req.body
 		});
-		user
+		pet
 			.save()
 			.then(result => {
 				res.status(200).json({
-					message: 'User succesfully created!',
+					message: 'Mascota creada',
 					data: {
 						...result['_doc']
 					}

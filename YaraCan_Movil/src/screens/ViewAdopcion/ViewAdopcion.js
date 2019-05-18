@@ -33,7 +33,7 @@ export default class ViewAdopcionScreen extends React.Component {
 					source = {imgBackground}
                     style={{width: '100%', height: '100%'}}>
 				<View>
-					<Sae
+					<Hoshi
 						style={{
 							width: '100%',
 							backgroundColor: '#ffa138',

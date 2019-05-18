@@ -133,6 +133,7 @@ export default class SignUp extends React.Component {
                             label={'Nombre de la mascota'}
                             iconClass={Icon}
                             iconColor={'#fff'}
+                            onChangeText={text => this.inputHandler('petname', text)}
                             labelStyle={{color: 'white'}}
                             iconSize={30}
                             iconWidth={40}
@@ -148,6 +149,7 @@ export default class SignUp extends React.Component {
                             iconClass={Icon}
                             iconName={'person'}
                             iconColor={'#fff'}
+                            onChangeText={text => this.inputHandler('sexo', text)}
                             labelStyle={{color: 'white'}}
                             iconSize={30}
                             iconWidth={40}
@@ -163,7 +165,7 @@ export default class SignUp extends React.Component {
                             }}
                             label={'Raza'}
                             labelStyle={{color: 'white'}}
-                           
+                            onChangeText={text => this.inputHandler('raza', text)}
                             iconClass={Icon}
                             iconName={'key'}
                             iconColor={'#fff'}
@@ -184,7 +186,7 @@ export default class SignUp extends React.Component {
                             }}
                             label={'Descripcion'}
                             labelStyle={{color: 'white'}}
-                   
+                            onChangeText={text => this.inputHandler('descripcion', text)}
                             iconClass={Icon}
                             iconName={'key'}
                             iconColor={'#fff'}

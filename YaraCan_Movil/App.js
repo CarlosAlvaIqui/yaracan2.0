@@ -25,10 +25,7 @@ import ViewAdopcionScreen from './src/screens/ViewAdopcion/ViewAdopcion';
 const AppStack = createDrawerNavigator({ Home: HomeScreen, Other: ChatScreen });
 const AuthStack = createBottomTabNavigator({
 	Sign: SignInScreen,
-	SignUp: SignUpScreen,
-	Home: HomeScreen,
-	ViewAdopcion: ViewAdopcionScreen,
-	
+	SignUp: SignUpScreen
 });
 export default createAppContainer(
 	createSwitchNavigator(

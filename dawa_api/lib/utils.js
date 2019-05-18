@@ -8,7 +8,7 @@ module.exports = {
 			username: user.username,
 			email: user.email
 		};
-		return (token = jwt.sign(u, process.env.JWT_SECRET, {
+		return (token = jwt.sign(u, 'funciona', {
 			expiresIn: 60 * 60 * 24
 		}));
 	},

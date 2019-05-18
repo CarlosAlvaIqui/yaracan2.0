@@ -4,7 +4,7 @@ import { footer } from 'react-bootstrap';
 const Footer = props => {
 	return (
 
-		<footer class="page-footer font-small indigo">
+		<footer id="footer" class="page-footer font-small indigo ">
 
 			<div class="container text-center text-md-left">
 

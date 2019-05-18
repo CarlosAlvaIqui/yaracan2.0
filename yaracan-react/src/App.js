@@ -9,6 +9,7 @@ class App extends Component {
 			<BrowserRouter>
 				<Layout>
 					<Switch />
+					
 				</Layout>
 			</BrowserRouter>
 		);

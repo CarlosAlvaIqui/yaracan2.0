@@ -4,15 +4,9 @@ import Icon from 'react-native-ionicons';
 import {
 	StyleSheet,
 	View,
-	Button,
 	Text,
 	ImageBackground,
-	TouchableOpacity,
-	ToastAndroid,
-	KeyboardAvoidingView,
-	Image,
-	FlatList,
-	AppRegistry
+	ToastAndroid
 } from 'react-native';
 import { navigate } from 'react-navigation';
 import AwesomeButton from 'react-native-really-awesome-button';
@@ -23,40 +17,38 @@ import bk from '../../assets/img/dragoncito.jpg';
 import arcjson from '../../archivos_json/json_files/jsonfile_1.json';
 import axios from 'axios';
 
+export default class Home extends React.Component {
+	static navigationOptions = {
+		title: 'Bienvenido a la App!',
+		tabBarIcon: ({ focused, horizontal, tintColor }) => {
+			return <Ionicons name="ios-clipboard" size={25} color={tintColor} />;
+		}
+	};
+	state = {
+		username: '',
+		password: '',
+		loading: false,
+		showPassword: false,
+		email: ''
+	};
+	showPassword = () => {
+		this.setState({ showPassword: !this.state.showPassword });
+	};
+	inputHandler = (field, value) => {
+		this.setState({ [field]: value });
+	};
+	_scrollToInput = () => {
+		const scrollResponder = this.refs.myScrollView.getScrollResponder();
+		const inputHandle = React.findNodeHandle(this.refs.myInput);
 
-
-export default class Home extends React.Component{
-    static navigationOptions = {
-        title: 'Bienvenido a la App!',
-        tabBarIcon:({ focused, horizontal, tintColor})=> {
-            return <Ionicons name="ios-clipboard" size={25} color={tintColor} />
-        }
-    };
-    state ={
-        username: '',
-        password: '',
-        loading: false,
-        showPassword: false,
-        email:''
-    };
-    showPassword = () =>{
-        this.setState({ showPassword: !this.state.showPassword});
-    }
-    inputHandler = (field,value) =>{
-        this.setState({[field]:value})
-    }
-    _scrollToInput = () => {
-        const scrollResponder = this.refs.myScrollView.getScrollResponder();
-        const inputHandle = React.findNodeHandle(this.refs.myInput)
-      
-        scrollResponder.scrollResponderScrollNativeHandleToKeyboard(
-          inputHandle, // The TextInput node handle
-          0, // The scroll view's bottom "contentInset" (default 0)
-          true // Prevent negative scrolling
-        );
-      }
-    onSubmitHandler = () =>{
-        /*if(this.state.user === '' || this.state.password === ''){
+		scrollResponder.scrollResponderScrollNativeHandleToKeyboard(
+			inputHandle, // The TextInput node handle
+			0, // The scroll view's bottom "contentInset" (default 0)
+			true // Prevent negative scrolling
+		);
+	};
+	onSubmitHandler = () => {
+		/*if(this.state.user === '' || this.state.password === ''){
             return ToastAndroid.showWithGravity(
                 'Falta ingresar datos!',
                 ToastAndroid.SHORT,
@@ -64,7 +56,6 @@ export default class Home extends React.Component{
             );
         }
     */
-<<<<<<< HEAD
 		this.setState({ loading: true });
 		axios({
 			method: 'POST',
@@ -97,211 +88,72 @@ export default class Home extends React.Component{
 	envioaotrapagina = () => {
 		this.props.navigation.navigate('SignUp');
 	};
-	//codigo de chullo no BORRAR
-	// este es tu codigo  chullito desde la linea 86 hasta 210
-	/* 
-    render(){
-        return(
-            <View style={{flex: 1}}>
-                <ImageBackground
-                    source = {imgBackground}
-                    style={{width: '100%', height: '100%'}}
-                    >
-                    
-                    <Text
-                    style={{
-                        textAlign: 'center',
-                        fontWeight: 'bold',
-                        fontSize: 26,
-                        color: '#fff'
-                    }}
-                >Registro</Text>
-                <View style={{padding:5}}>
-                    <View style={{marginTop:5}}>
-                        <View>
-                        <Hoshi style={{
-                            width: '100%',
-                            backgroundColor: '#ffa138',
-                            opacity: 0.8,
-                            marginBottom: 10
-                            }}
-                            label={'Usuario'}
-                            iconClass={Icon}
-                            iconName={'person'}
-                            iconColor={'#fff'}
-                            labelStyle={{color: 'white'}}
-                            iconSize={30}
-                            iconWidth={40}
-                            inputPadding={16}
-                            onChangeText={text => this.inputHandler('username',text)}
-                            value={this.state.username}
-                        />
-                        <Hoshi style={{
-                            width: '100%',
-                            backgroundColor: '#ffa138',
-                            opacity: 0.8,
-                            marginBottom: 10
-                            }}
-                            label={'Correo'}
-                            iconClass={Icon}
-                            iconName={'person'}
-                            iconColor={'#fff'}
-                            labelStyle={{color: 'white'}}
-                            iconSize={30}
-                            iconWidth={40}
-                            inputPadding={16}
-                            onChangeText={text => this.inputHandler('email',text)}
-                            value={this.state.email}
-                        />
-                     
-                        </View>
-                        <View style={{flexDirection:'row'}}>
-                        <Hoshi style={{
-                            width: '100%',
-                            backgroundColor: '#ffa138',
-                            opacity: 0.8
-                            }}
-                            label={'Contraseña'}
-                            labelStyle={{color: 'white'}}
-                            onChangeText={text => this.inputHandler('password',text)}
-                            value={this.state.password}
-                            secureTextEntry={!this.state.showPassword}
-                            iconClass={Icon}
-                            iconName={'key'}
-                            iconColor={'#fff'}
-                            iconSize={30}
-                            iconWidth={40}
-                            inputPadding={16}
-                        />
-                        
-                       </View>
-                       <View style={{flexDirection:'row'}}>
-                        <Hoshi style={{
-                            marginTop: 10,
-                            width: '100%',
-                            backgroundColor: '#ffa138',
-                            opacity: 0.8
-                            
-                            }}
-                            label={'Repetir Contraseña'}
-                            labelStyle={{color: 'white'}}
-                            onChangeText={text => this.inputHandler('password',text)}
-                            value={this.state.password}
-                            secureTextEntry={!this.state.showPassword}
-                            iconClass={Icon}
-                            iconName={'key'}
-                            iconColor={'#fff'}
-=======
-        this.setState({ loading:true});
-        axios({
-            method: 'POST',
-            url: 'http://192.168.43.168:8080/api/user/signup',
-            data:{
-                username: this.state.username,
-                password: this.state.password,
-                email: this.state.email
-            }
-        })
-            .catch(err => {
-                ToastAndroid.showWithGravity(
-                    'Hubo un problema con el registro',
-                    ToastAndroid.LONG,
-                    ToastAndroid.TOP
-                );
-                console.warn(err);
-                this.setState({loading:false});
-            });
-    };
-    _showMoreApp = () => {
-        this.props.navigation.navigate('chat');
-    };
-    _signOutAsync = async () => {
-        await AsyncStorage.clear();
-        this.props.navigation.navigate('Auth');
-    };
-    cambiaotro = () =>{
-        this.props.navigation.navigate('SignIn');
-        };
-     envioaotrapagina = () =>{
-            this.props.navigation.navigate('SignUp');
-            };
-    listapage = () =>{
-            this.props.navigation.navigate('Publicaciones_ls');
-            };
-   
->>>>>>> 44b2bed033f8d01c89715f25c6e453d4fb49f5e3
+	render() {
+		return (
+			<View style={{ flex: 1 }}>
+				<ImageBackground
+					source={imgBackground}
+					style={{ width: '100%', height: '100%' }}
+				>
+					<View style={styles.top}>
+						<Text style={{ fontSize: 50, color: 'white' }}>Yara Can</Text>
+						<View style={styles.profileimage} />
+					</View>
+					<View style={styles.center} />
 
+					<View style={styles.bottom}>
+						<View style={styles.bottomItem}>
+							<View style={styles.bottomItemInner}>
+								<AwesomeButton onPress={this.cambiaotro}>
+									<Text>Adopciones</Text>
+								</AwesomeButton>
+							</View>
+						</View>
 
-render(){
-    return(
-        <View style={{flex: 1}}>
-            <ImageBackground
-                source = {imgBackground}
-                style={{width: '100%', height: '100%'}}
-                >
-            <View style={styles.top}>
-            <Text style={{fontSize: 50, color:'white'}}> Yara Can</Text>
-                    <View style={styles.profileimage}></View>
-            </View>
-            <View style={styles.center}></View>
+						<View style={styles.bottomItem}>
+							<View style={styles.bottomItemInner}>
+								<AwesomeButton onPress={this.cambiaotro}>
+									<Text>Reportes</Text>
+								</AwesomeButton>
+							</View>
+						</View>
 
-            <View style={styles.bottom}>
+						<View style={styles.bottomItem}>
+							<View style={styles.bottomItemInner}>
+								<AwesomeButton onPress={this.envioaotrapagina}>
+									<Text>Eventos</Text>
+								</AwesomeButton>
+							</View>
+						</View>
 
-                <View style={styles.bottomItem}>
-                    <View style={styles.bottomItemInner}>
-                  <AwesomeButton onPress={this.cambiaotro}>
-                      <Text>Adopciones</Text>
-                  </AwesomeButton>
-                    </View>
-                </View>
+						<View style={styles.bottomItem}>
+							<View style={styles.bottomItemInner}>
+								<AwesomeButton onPress={this.envioaotrapagina}>
+									<Text>Lugares</Text>
+								</AwesomeButton>
+							</View>
+						</View>
 
-                <View style={styles.bottomItem}>
-                    <View style={styles.bottomItemInner}>
-                    <AwesomeButton onPress={this.cambiaotro}>
-                      <Text>Reportes</Text>
-                  </AwesomeButton>
-                    </View>
-                </View>
+						<View style={styles.bottomItem}>
+							<View style={styles.bottomItemInner}>
+								<AwesomeButton onPress={this.listapage}>
+									<Text>Noticias</Text>
+								</AwesomeButton>
+							</View>
+						</View>
 
-                <View style={styles.bottomItem}>
-                    <View style={styles.bottomItemInner}>
-                    <AwesomeButton onPress={this.envioaotrapagina}>
-                      <Text>Eventos</Text>
-                  </AwesomeButton>
-                    </View>
-                </View>
-
-                <View style={styles.bottomItem}>
-                    <View style={styles.bottomItemInner}>
-                    <AwesomeButton onPress={this.envioaotrapagina}>
-                      <Text>Lugares</Text>
-                  </AwesomeButton>
-                    </View>
-                </View>
-
-                <View style={styles.bottomItem}>
-                    <View style={styles.bottomItemInner}>
-                    <AwesomeButton onPress={this.listapage}>
-                      <Text>Noticias</Text>
-                  </AwesomeButton>
-                    </View>
-                </View>
-
-                <View style={styles.bottomItem}>
-                    <View style={styles.bottomItemInner}>
-                    <AwesomeButton onPress={this.listapage}>
-                      <Text>Albergues</Text>
-                  </AwesomeButton>
-                    </View>
-                </View>
-
-            </View>
-            
-            </ImageBackground>
-        </View>  
-    );
-
-}
+						<View style={styles.bottomItem}>
+							<View style={styles.bottomItemInner}>
+								<AwesomeButton onPress={this.listapage}>
+									<Text>Albergues</Text>
+								</AwesomeButton>
+							</View>
+						</View>
+					</View>
+				</ImageBackground>
+			</View>
+		);
+	}
 }
 
 const styles = StyleSheet.create({

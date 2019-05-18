@@ -16,7 +16,6 @@ import imgBackground from '../../assets/img/perritos.jpg';
 import bk from '../../assets/img/dragoncito.jpg';
 import arcjson from '../../archivos_json/json_files/jsonfile_1.json';
 import axios from 'axios';
-import ViewAdopcion from '../ViewAdopcion/ViewAdopcion';
 
 export default class Home extends React.Component {
 	static navigationOptions = {
@@ -84,10 +83,10 @@ export default class Home extends React.Component {
 		this.props.navigation.navigate('Auth');
 	};
 	change_viewAdopcion = () => {
-		this.props.navigation.navigate('ViewAdopcion');
+		this.props.navigation.navigate('View_Adopcion');
 	};
 	cambiar_alaotravadopcion = () => {
-		this.props.navigation.navigate('View_Adopcion');
+		this.props.navigation.navigate('Auth');
 	};
 	envioaotrapagina = () => {
 		this.props.navigation.navigate('SignUp');

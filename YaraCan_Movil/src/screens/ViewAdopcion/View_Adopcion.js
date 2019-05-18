@@ -38,10 +38,10 @@ export default class SignUp extends React.Component {
 
 	state = {
 		petname: '',
-        sexo: '',
-        raza:'',
-        descripcion:'',
-		loading: false,
+		sexo: '',
+		raza: '',
+		descripcion: '',
+		loading: false
 	};
 
 	showPassword = () => {
@@ -70,161 +70,156 @@ export default class SignUp extends React.Component {
             );
         }
     */
-        this.setState({ loading:true});
-        axios({
-            method: 'POST',
-            url: 'http://192.168.43.168:8080/api/user/signup',
-            data:{
-                username: this.state.username,
-                password: this.state.password,
-                email: this.state.email
-            }
-        })
-            .catch(err => {
-                ToastAndroid.showWithGravity(
-                    'Hubo un problema con el registro',
-                    ToastAndroid.LONG,
-                    ToastAndroid.TOP
-                );
-                console.warn(err);
-                this.setState({loading:false});
-            });
-    };
-    _showMoreApp = () => {
-        this.props.navigation.navigate('chat');
-    };
-    _signOutAsync = async () => {
-        await AsyncStorage.clear();
-        this.props.navigation.navigate('Auth');
-    };
-    cambiaotro = () =>{
-        this.props.navigation.navigate('home_botones');
-        };
-     envioaotrapagina = () =>{
-            this.props.navigation.navigate('SignIn');
-            };
-    //codigo de chullo no BORRAR 
-    // este es tu codigo  chullito desde la linea 86 hasta 210
-    
-    render(){
-        return(
-            <View style={{flex: 1}}>
-                <ImageBackground
-                    source = {imgBackground}
-                    style={{width: '100%', height: '100%'}}
-                    >
-                    
-                    <Text
-                    style={{
-                        textAlign: 'center',
-                        fontWeight: 'bold',
-                        fontSize: 26,
-                        color: '#fff'
-                    }}
-                >Registro</Text>
-                <View style={{padding:5}}>
-                    <View style={{marginTop:5}}>
-                        <View>
-                        <Madoka style={{
-                            width: '100%',
-                            opacity: 0.8,
-                            marginBottom: 10
-                            }}
-                            label={'Nombre de la mascota'}
-                            iconClass={Icon}
-                            iconColor={'#fff'}
-                            labelStyle={{color: 'white'}}
-                            iconSize={30}
-                            iconWidth={40}
-                            inputPadding={16}
-                            value={this.state.petname}
-                        />
-                        <Madoka style={{
-                            width: '100%',
-                            opacity: 0.8,
-                            marginBottom: 10
-                            }}
-                            label={'Sexo'}
-                            iconClass={Icon}
-                            iconName={'person'}
-                            iconColor={'#fff'}
-                            labelStyle={{color: 'white'}}
-                            iconSize={30}
-                            iconWidth={40}
-                            inputPadding={16}
-                            value={this.state.sexo}
-                        />
-                     
-                        </View>
-                        <View style={{flexDirection:'row'}}>
-                        <Madoka style={{
-                            width: '100%',
-                            opacity: 0.8
-                            }}
-                            label={'Raza'}
-                            labelStyle={{color: 'white'}}
-                           
-                            iconClass={Icon}
-                            iconName={'key'}
-                            iconColor={'#fff'}
-                            iconSize={30}
-                            iconWidth={40}
-                            inputPadding={16}
-                            value={this.state.raza}
+		this.setState({ loading: true });
+		axios({
+			method: 'POST',
+			url: 'http://192.168.0.12:8080/api/pet/',
+			data: {
+				petname: this.state.petname,
+				sexo: this.state.sexo,
+				raza: this.state.raza,
+				descripcion: this.state.descripcion
+			}
+		}).catch(err => {
+			ToastAndroid.showWithGravity(
+				'Hubo un problema con el registro',
+				ToastAndroid.LONG,
+				ToastAndroid.TOP
+			);
+			console.warn(err);
+			this.setState({ loading: false });
+		});
+	};
+	_showMoreApp = () => {
+		this.props.navigation.navigate('chat');
+	};
+	_signOutAsync = async () => {
+		await AsyncStorage.clear();
+		this.props.navigation.navigate('Auth');
+	};
+	cambiaotro = () => {
+		this.props.navigation.navigate('home_botones');
+	};
+	envioaotrapagina = () => {
+		this.props.navigation.navigate('SignIn');
+	};
+	//codigo de chullo no BORRAR
+	// este es tu codigo  chullito desde la linea 86 hasta 210
 
-                        />
-                        
-                       </View>
-                       <View style={{flexDirection:'row'}}>
-                        <Madoka style={{
-                            marginTop: 10,
-                            width: '100%',
-                            opacity: 0.8
-                            
-                            }}
-                            label={'Descripcion'}
-                            labelStyle={{color: 'white'}}
-                   
-                            iconClass={Icon}
-                            iconName={'key'}
-                            iconColor={'#fff'}
-
-                            iconSize={30}
-                            iconWidth={40}
-                            inputPadding={16}
-                            value={this.state.descripcion}
-
-                        />
-                       </View>
-                        <TouchableOpacity
-                            onPress={this.onSubmitHandler}
-                            style={{
-                                marginTop: 10,
-                                padding: 15,
-                                justifyContent: 'center',
-                                alignItems:'center',
-                                borderRadius: 25,
-                                backgroundColor: '#dcdcdc'
-                            }}
-                        >
-                        <Text
-                            style={{
-                                color: '#46494f',
-                                fontSize: 15,
-                                fontWeight: 'bold'
-                            }}>
-                        Registrarse
-                        </Text>
-
-                        </TouchableOpacity>
-                    
-                   </View>
-                </View>
-                </ImageBackground>
-            </View>  
-        );
-    }
-
+	render() {
+		return (
+			<View style={{ flex: 1 }}>
+				<ImageBackground
+					source={imgBackground}
+					style={{ width: '100%', height: '100%' }}
+				>
+					<Text
+						style={{
+							textAlign: 'center',
+							fontWeight: 'bold',
+							fontSize: 26,
+							color: '#fff'
+						}}
+					>
+						Registro
+					</Text>
+					<View style={{ padding: 5 }}>
+						<View style={{ marginTop: 5 }}>
+							<View>
+								<Madoka
+									style={{
+										width: '100%',
+										opacity: 0.8,
+										marginBottom: 10
+									}}
+									label={'Nombre de la mascota'}
+									iconClass={Icon}
+									iconColor={'#fff'}
+									labelStyle={{ color: 'white' }}
+									iconSize={30}
+									iconWidth={40}
+									inputPadding={16}
+									value={this.state.petname}
+								/>
+								<Madoka
+									style={{
+										width: '100%',
+										opacity: 0.8,
+										marginBottom: 10
+									}}
+									label={'Sexo'}
+									iconClass={Icon}
+									iconName={'person'}
+									iconColor={'#fff'}
+									labelStyle={{ color: 'white' }}
+									iconSize={30}
+									iconWidth={40}
+									inputPadding={16}
+									value={this.state.sexo}
+								/>
+							</View>
+							<View style={{ flexDirection: 'row' }}>
+								<Madoka
+									style={{
+										width: '100%',
+										opacity: 0.8
+									}}
+									label={'Raza'}
+									labelStyle={{ color: 'white' }}
+									iconClass={Icon}
+									iconName={'key'}
+									iconColor={'#fff'}
+									iconSize={30}
+									iconWidth={40}
+									inputPadding={16}
+									value={this.state.raza}
+								/>
+							</View>
+							<View style={{ flexDirection: 'row' }}>
+								<Madoka
+									style={{
+										marginTop: 10,
+										width: '100%',
+										opacity: 0.8
+									}}
+									label={'Descripcion'}
+									labelStyle={{ color: 'white' }}
+									iconClass={Icon}
+									iconName={'key'}
+									iconColor={'#fff'}
+									iconSize={30}
+									iconWidth={40}
+									inputPadding={16}
+									value={this.state.descripcion}
+								/>
+							</View>
+							<TouchableOpacity
+								onPress={this.onSubmitHandler}
+								style={{
+									marginTop: 10,
+									padding: 15,
+									justifyContent: 'center',
+									alignItems: 'center',
+									borderRadius: 25,
+									backgroundColor: '#dcdcdc'
+								}}
+							>
+								<Text
+									style={{
+										color: '#46494f',
+										fontSize: 15,
+										fontWeight: 'bold'
+									}}
+								>
+									Registrarse
+								</Text>
+							</TouchableOpacity>
+						</View>
+					</View>
+				</ImageBackground>
+			</View>
+		);
+	}
 }
 
 const styles = StyleSheet.create({

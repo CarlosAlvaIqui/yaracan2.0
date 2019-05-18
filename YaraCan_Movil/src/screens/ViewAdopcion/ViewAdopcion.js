@@ -12,6 +12,7 @@ import {
 } from 'react-native';
 import AwesomeButton from 'react-native-really-awesome-button';
 import { Hoshi } from 'react-native-textinput-effects';
+import imgBackground from '../../assets/img/perritos.jpg';
 
 import axios from 'axios';
 
@@ -28,9 +29,11 @@ export default class ViewAdopcionScreen extends React.Component {
 	render() {
 		return (
 			<View style={{ flex: 1 }}>
-				<Text>Adopciones</Text>
+				<ImageBackground 
+					source = {imgBackground}
+                    style={{width: '100%', height: '100%'}}>
 				<View>
-					<Hoshi
+					<Sae
 						style={{
 							width: '100%',
 							backgroundColor: '#ffa138',
@@ -100,6 +103,7 @@ export default class ViewAdopcionScreen extends React.Component {
 						</View>
 					</View>
 				</View>
+				</ImageBackground>
 			</View>
 		);
 	}

@@ -16,7 +16,7 @@ import imgBackground from '../../assets/img/perritos.jpg';
 import bk from '../../assets/img/dragoncito.jpg';
 import arcjson from '../../archivos_json/json_files/jsonfile_1.json';
 import axios from 'axios';
-import vistaBotones from '../home_botones/home_botones';
+import ViewAdopcion from '../ViewAdopcion/ViewAdopcion';
 
 export default class Home extends React.Component {
 	static navigationOptions = {
@@ -105,7 +105,7 @@ export default class Home extends React.Component {
 					<View style={styles.bottom}>
 						<View style={styles.bottomItem}>
 							<View style={styles.bottomItemInner}>
-								<AwesomeButton onPress={this.cambiaotro}>
+								<AwesomeButton onPress={this.change_viewAdopcion}>
 									<Text>Adopciones</Text>
 								</AwesomeButton>
 							</View>

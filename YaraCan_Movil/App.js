@@ -32,7 +32,8 @@ export default createAppContainer(
 		{
 			AuthLoading: AuthLoadingScreen,
 			App: AppStack,
-			Auth: AuthStack
+			Auth: AuthStack,
+			ViewAdopcion: ViewAdopcionScreen
 		},
 		{
 			initialRouteName: 'AuthLoading'

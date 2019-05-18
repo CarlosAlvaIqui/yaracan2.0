@@ -86,6 +86,9 @@ export default class Home extends React.Component {
 	change_viewAdopcion = () => {
 		this.props.navigation.navigate('ViewAdopcion');
 	};
+	cambiar_alaotravadopcion = () => {
+		this.props.navigation.navigate('View_Adopcion');
+	};
 	envioaotrapagina = () => {
 		this.props.navigation.navigate('SignUp');
 	};
@@ -113,7 +116,7 @@ export default class Home extends React.Component {
 
 						<View style={styles.bottomItem}>
 							<View style={styles.bottomItemInner}>
-								<AwesomeButton onPress={this.cambiaotro}>
+								<AwesomeButton onPress={this.cambiar_alaotravadopcion}>
 									<Text>Reportes</Text>
 								</AwesomeButton>
 							</View>

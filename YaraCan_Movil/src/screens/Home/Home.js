@@ -83,7 +83,7 @@ export default class Home extends React.Component {
 		this.props.navigation.navigate('Auth');
 	};
 	change_viewAdopcion = () => {
-		this.props.navigation.navigate('View_Adopcion');
+		this.props.navigation.navigate('beta');
 	};
 	cambiar_alaotravadopcion = () => {
 		this.props.navigation.navigate('Auth');

@@ -10,25 +10,19 @@ import {
 	KeyboardAvoidingView,
 	Image,
 	FlatList,
-	AppRegistry
+	AppRegistry,
+	Platform
 } from 'react-native';
-import { Fumi } from 'react-native-textinput-effects';
 import Icon from 'react-native-ionicons';
-import { Hoshi } from 'react-native-textinput-effects';
 import { Madoka } from 'react-native-textinput-effects';
-
-import { Jiro } from 'react-native-textinput-effects';
-
-import { Sae } from 'react-native-textinput-effects';
-import AwesomeButton from 'react-native-really-awesome-button';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import AsyncStorage from '@react-native-community/async-storage';
 import imgBackground from '../../assets/img/perritos.jpg';
-import bk from '../../assets/img/dragoncito.jpg';
-import arcjson from '../../archivos_json/json_files/jsonfile_1.json';
 import axios from 'axios';
+import ImagePicker from 'react-native-image-picker';
+import firebase from 'firebase';
 
-export default class SignUp extends React.Component {
+export default class View_Adopcion extends React.Component {
 	static navigationOptions = {
 		title: 'Bienvenido a la App!',
 		tabBarIcon: ({ focused, horizontal, tintColor }) => {
@@ -41,8 +35,14 @@ export default class SignUp extends React.Component {
 		sexo: '',
 		raza: '',
 		descripcion: '',
-		loading: false
+		loading: false,
+		avatarSource: null
 	};
+	constructor(props) {
+		super(props);
+
+		this.selectPhotoTapped = this.selectPhotoTapped.bind(this);
+	}
 
 	showPassword = () => {
 		this.setState({ showPassword: !this.state.showPassword });
@@ -50,6 +50,7 @@ export default class SignUp extends React.Component {
 	inputHandler = (field, value) => {
 		this.setState({ [field]: value });
 	};
+
 	_scrollToInput = () => {
 		const scrollResponder = this.refs.myScrollView.getScrollResponder();
 		const inputHandle = React.findNodeHandle(this.refs.myInput);
@@ -60,6 +61,37 @@ export default class SignUp extends React.Component {
 			true // Prevent negative scrolling
 		);
 	};
+	selectPhotoTapped() {
+		const options = {
+			quality: 1.0,
+			maxWidth: 500,
+			maxHeight: 500,
+			storageOptions: {
+				skipBackup: true
+			}
+		};
+
+		ImagePicker.showImagePicker(options, response => {
+			console.log('Response = ', response);
+
+			if (response.didCancel) {
+				console.log('User cancelled photo picker');
+			} else if (response.error) {
+				console.log('ImagePicker Error: ', response.error);
+			} else if (response.customButton) {
+				console.log('User tapped custom button: ', response.customButton);
+			} else {
+				let source = { uri: response.uri };
+				// You can also display the image using data:
+				//let source = { uri: 'data:image/jpeg;base64,' + response.data };
+
+				this.setState({
+					avatarSource: source
+				});
+				console.log(source);
+			}
+		});
+	}
 
 	onSubmitHandler = () => {
 		/*if(this.state.user === '' || this.state.password === ''){
@@ -103,10 +135,14 @@ export default class SignUp extends React.Component {
 	envioaotrapagina = () => {
 		this.props.navigation.navigate('SignIn');
 	};
-	//codigo de chullo no BORRAR
-	// este es tu codigo  chullito desde la linea 86 hasta 210
+	mostrarAlerta = () => {
+		console.log(this.state.avatarSource);
+	};
+	//este es tu codigo  chullito desde la linea 86 hasta 210
 
 	render() {
+		// asociamos el manejador de eventos sobre el INPUT FILE
+
 		return (
 			<View style={{ flex: 1 }}>
 				<ImageBackground
@@ -215,8 +251,56 @@ export default class SignUp extends React.Component {
 										fontWeight: 'bold'
 									}}
 								>
-									Registrarse
+									Publicar
 								</Text>
+							</TouchableOpacity>
+							<TouchableOpacity
+								style={{
+									marginTop: 10,
+									padding: 15,
+									justifyContent: 'center',
+									alignItems: 'center',
+									borderRadius: 25,
+									backgroundColor: '#dcdcdc'
+								}}
+							>
+								<Text
+									style={{
+										color: '#46494f',
+										fontSize: 15,
+										fontWeight: 'bold'
+									}}
+								>
+									Subir foto
+								</Text>
+							</TouchableOpacity>
+							<TouchableOpacity
+								onPress={this.selectPhotoTapped.bind(this)}
+								style={{
+									marginTop: 10,
+									padding: 15,
+									justifyContent: 'center',
+									alignItems: 'center',
+									borderRadius: 25,
+									backgroundColor: '#dcdcdc'
+								}}
+							>
+								<View
+									style={[
+										styles.avatar,
+										styles.avatarContainer,
+										{ marginBottom: 20 }
+									]}
+								>
+									{this.state.avatarSource === null ? (
+										<Text>Selecciona una Foto</Text>
+									) : (
+										<Image
+											style={styles.avatar}
+											source={this.state.avatarSource}
+										/>
+									)}
+								</View>
 							</TouchableOpacity>
 						</View>
 					</View>
@@ -256,5 +340,20 @@ const styles = StyleSheet.create({
 	},
 	botoncolor: {
 		color: 'white'
+	},
+	container: {
+		flex: 1,
+		justifyContent: 'center',
+		alignItems: 'center',
+		backgroundColor: '#F5FCFF'
+	},
+	avatarContainer: {
+		borderColor: '#9B9B9B',
+		justifyContent: 'center',
+		alignItems: 'center'
+	},
+	avatar: {
+		width: 150,
+		height: 150
 	}
 });

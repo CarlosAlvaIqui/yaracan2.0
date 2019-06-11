@@ -54,7 +54,7 @@ export default class SignInScreen extends React.Component {
 		})
 			.then(async response => {
 				console.log(response.data);
-				this.props.navigation.navigate('View_Adopcion');
+				this.props.navigation.navigate('cardPost');
 				await AsyncStorage.setItem('userId', response.data.data._id);
 				await AsyncStorage.setItem('userName', response.data.data.username);
 				await AsyncStorage.setItem('userEmail', response.data.data.email);
@@ -65,7 +65,6 @@ export default class SignInScreen extends React.Component {
 					ToastAndroid.TOP
 				);
 				console.log('-----------------------> Logeo Existo');
-				this.props.navigation.navigate('Home');
 				await AsyncStorage.setItem('userToken', response.data.token);
 			})
 			.catch(err => {

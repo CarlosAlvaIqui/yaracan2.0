@@ -19,7 +19,26 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import AsyncStorage from '@react-native-community/async-storage';
 import imgBackground from '../../assets/img/perritos.jpg';
 import axios from 'axios';
-import ImagePicker from 'react-native-image-picker';
+
+import FirebaseClient from '../../lib/FirebaseClient';
+import RNFetchBlob from 'react-native-fetch-blob';
+
+var ImagePicker = require('react-native-image-picker');
+
+var options = {
+	title: 'Select Avatar',
+	customButtons: [{ name: 'fb', title: 'Choose Photo from Facebook' }],
+	storageOptions: {
+		skipBackup: true,
+		path: 'images'
+	}
+};
+
+const Blob = RNFetchBlob.polyfill.Blob;
+const fs = RNFetchBlob.fs;
+
+window.XMLHttpRequest = RNFetchBlob.polyfill.XMLHttpRequest;
+window.Blob = Blob;
 
 export default class View_Adopcion extends React.Component {
 	static navigationOptions = {
@@ -28,19 +47,90 @@ export default class View_Adopcion extends React.Component {
 			return <Ionicons name="ios-clipboard" size={25} color={tintColor} />;
 		}
 	};
-
+	constructor() {
+		super();
+		this.getImage = this.getImage.bind(this);
+		this.state = {
+			sourceImagePet:
+				'https://avatars0.githubusercontent.com/u/12028011?v=3&s=200'
+		};
+	}
 	state = {
 		petname: '',
 		sexo: '',
 		raza: '',
 		descripcion: '',
 		loading: false,
-		avatarSource: null
+		avatarSource: null,
+		sourceImagePet: '',
+		urlImagePet: '',
+		userName: '',
+		userEmail: ''
 	};
-	constructor(props) {
-		super(props);
+	componentDidMount = async () => {
+		const userName = await AsyncStorage.getItem('userName');
+		const userEmail = await AsyncStorage.getItem('userEmail');
+		this.setState({
+			userName: userName,
+			userEmail: userEmail
+		});
+	};
+	makeid(length) {
+		var result = '';
+		var characters =
+			'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+		var charactersLength = characters.length;
+		for (var i = 0; i < length; i++) {
+			result += characters.charAt(Math.floor(Math.random() * charactersLength));
+		}
+		return result;
+	}
+	uploadImage(uri, mime = 'application/octet-stream') {
+		return new Promise((resolve, reject) => {
+			const uploadUri =
+				Platform.OS === 'ios' ? uri.replace('file://', '') : uri;
+			let uploadBlob = null;
+			let r = this.makeid(16);
+			const imageRef = FirebaseClient.storage()
+				.ref('imagen')
+				.child(r + '.jpg');
 
-		this.selectPhotoTapped = this.selectPhotoTapped.bind(this);
+			fs.readFile(uploadUri, 'base64')
+				.then(data => {
+					return Blob.build(data, { type: `${mime};BASE64` });
+				})
+				.then(blob => {
+					uploadBlob = blob;
+					return imageRef.put(blob, { contentType: mime });
+				})
+				.then(() => {
+					uploadBlob.close();
+					return imageRef.getDownloadURL();
+				})
+				.then(url => {
+					resolve(url);
+				})
+				.catch(error => {
+					reject(error);
+				});
+		});
+	}
+
+	getImage() {
+		ImagePicker.showImagePicker(options, response => {
+			console.log('Response = ', response);
+
+			if (response.didCancel) {
+				console.log('User cancelled image picker');
+			} else if (response.error) {
+				console.log('ImagePicker Error: ', response.error);
+			} else if (response.customButton) {
+				console.log('User tapped custom button: ', response.customButton);
+			} else {
+				// let source = { uri: response.uri };
+				this.setState({ sourceImagePet: response.uri });
+			}
+		});
 	}
 
 	showPassword = () => {
@@ -60,37 +150,6 @@ export default class View_Adopcion extends React.Component {
 			true // Prevent negative scrolling
 		);
 	};
-	selectPhotoTapped() {
-		const options = {
-			quality: 1.0,
-			maxWidth: 500,
-			maxHeight: 500,
-			storageOptions: {
-				skipBackup: true
-			}
-		};
-
-		ImagePicker.showImagePicker(options, response => {
-			console.log('Response = ', response);
-
-			if (response.didCancel) {
-				console.log('User cancelled photo picker');
-			} else if (response.error) {
-				console.log('ImagePicker Error: ', response.error);
-			} else if (response.customButton) {
-				console.log('User tapped custom button: ', response.customButton);
-			} else {
-				let source = { uri: response.uri };
-				// You can also display the image using data:
-				//let source = { uri: 'data:image/jpeg;base64,' + response.data };
-
-				this.setState({
-					avatarSource: source
-				});
-				console.log(source);
-			}
-		});
-	}
 
 	onSubmitHandler = () => {
 		/*if(this.state.user === '' || this.state.password === ''){
@@ -99,27 +158,49 @@ export default class View_Adopcion extends React.Component {
                 ToastAndroid.SHORT,
                 ToastAndroid.TOP
             );
-        }
+		}
+		
     */
 		this.setState({ loading: true });
-		axios({
-			method: 'POST',
-			url: 'http://192.168.0.12:8080/api/pet/',
-			data: {
-				petname: this.state.petname,
-				sexo: this.state.sexo,
-				raza: this.state.raza,
-				descripcion: this.state.descripcion
-			}
-		}).catch(err => {
-			ToastAndroid.showWithGravity(
-				'Hubo un problema con el registro',
-				ToastAndroid.LONG,
-				ToastAndroid.TOP
-			);
-			console.warn(err);
-			this.setState({ loading: false });
-		});
+		this.uploadImage(this.state.sourceImagePet)
+			.then(url => {
+				alert('Registro cargado con exito');
+				this.setState({ urlImagePet: url });
+				console.log('>>>>>>>>>>>>>>>>>>>>' + this.state.urlImagePet);
+			})
+			.then(() => {
+				//para subirlo al mongo db
+				axios({
+					method: 'POST',
+					url: 'http://172.23.15.232:8080/api/pet/',
+					data: {
+						petname: this.state.petname,
+						sexo: this.state.sexo,
+						raza: this.state.raza,
+						descripcion: this.state.descripcion,
+						urlImage: this.state.urlImagePet,
+						userPost: [
+							{
+								userName: this.state.userName,
+								emailUser: this.state.userEmail
+							}
+						]
+					}
+				})
+					.then(() => {
+						console.log('<<<<<<<<<<<<<<<<<<<<<<<<<<<' + this.state.urlImagePet);
+					})
+					.catch(err => {
+						ToastAndroid.showWithGravity(
+							'Hubo un problema con el registro',
+							ToastAndroid.LONG,
+							ToastAndroid.TOP
+						);
+						console.warn(err);
+						this.setState({ loading: false });
+					});
+			})
+			.catch(error => console.log(error));
 	};
 	_showMoreApp = () => {
 		this.props.navigation.navigate('chat');
@@ -137,7 +218,6 @@ export default class View_Adopcion extends React.Component {
 	mostrarAlerta = () => {
 		console.log(this.state.avatarSource);
 	};
-	//este es tu codigo  chullito desde la linea 86 hasta 210
 
 	render() {
 		// asociamos el manejador de eventos sobre el INPUT FILE
@@ -253,55 +333,21 @@ export default class View_Adopcion extends React.Component {
 									Publicar
 								</Text>
 							</TouchableOpacity>
-							<TouchableOpacity
-								style={{
-									marginTop: 10,
-									padding: 15,
-									justifyContent: 'center',
-									alignItems: 'center',
-									borderRadius: 25,
-									backgroundColor: '#dcdcdc'
-								}}
-							>
-								<Text
-									style={{
-										color: '#46494f',
-										fontSize: 15,
-										fontWeight: 'bold'
-									}}
-								>
-									Subir foto
-								</Text>
-							</TouchableOpacity>
-							<TouchableOpacity
-								onPress={this.selectPhotoTapped.bind(this)}
-								style={{
-									marginTop: 10,
-									padding: 15,
-									justifyContent: 'center',
-									alignItems: 'center',
-									borderRadius: 25,
-									backgroundColor: '#dcdcdc'
-								}}
-							>
-								<View
-									style={[
-										styles.avatar,
-										styles.avatarContainer,
-										{ marginBottom: 20 }
-									]}
-								>
-									{this.state.avatarSource === null ? (
-										<Text>Selecciona una Foto</Text>
-									) : (
-										<Image
-											style={styles.avatar}
-											source={this.state.avatarSource}
-										/>
-									)}
-								</View>
-							</TouchableOpacity>
 						</View>
+					</View>
+					<View style={styles.container}>
+						<Text style={styles.welcome}>
+							Seleccione una foto de su mascota.
+						</Text>
+						<Image
+							style={{ width: 100, height: 100 }}
+							source={{ uri: this.state.sourceImagePet }}
+						/>
+						<Button
+							onPress={this.getImage}
+							title="Cambiar Imagen"
+							color="#841584"
+						/>
 					</View>
 				</ImageBackground>
 			</View>
@@ -310,49 +356,20 @@ export default class View_Adopcion extends React.Component {
 }
 
 const styles = StyleSheet.create({
-	containerflat: {
-		justifyContent: 'center',
-		alignItems: 'center'
-	},
-
-	top: {
-		height: '15%',
-		alignItems: 'center',
-		justifyContent: 'center'
-	},
-	bottom: {
-		height: '45%',
-		flexDirection: 'row',
-		flexWrap: 'wrap',
-		padding: 5
-	},
-	bottomItem: {
-		width: '50%',
-		height: '50%',
-		padding: 5
-	},
-	bottomItemInner: {
-		flex: 1,
-		opacity: 0.8,
-		justifyContent: 'center',
-		alignItems: 'center'
-	},
-	botoncolor: {
-		color: 'white'
-	},
 	container: {
 		flex: 1,
 		justifyContent: 'center',
 		alignItems: 'center',
 		backgroundColor: '#F5FCFF'
 	},
-	avatarContainer: {
-		borderColor: '#9B9B9B',
-		justifyContent: 'center',
-		alignItems: 'center'
+	welcome: {
+		fontSize: 20,
+		textAlign: 'center',
+		margin: 10
 	},
-	avatar: {
-		width: 150,
-		height: 150
+	instructions: {
+		textAlign: 'center',
+		color: '#333333',
+		marginBottom: 5
 	}
 });

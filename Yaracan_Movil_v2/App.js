@@ -19,12 +19,13 @@ import SignUpScreen from './src/screens/SignUp/SignUp';
 import HomeScreen from './src/screens/Home/Home';
 import ChatScreen from './src/screens/Chat/Chat';
 import Camera from './src/screens/Camera/Camera';
-import Map from './src/screens/Map/Map';
 import Profile from './src/screens/Profile/Profile';
 import ProfileEdit from './src/screens/Profile/ProfileEdit/ProfileEdit';
 import Lists from './src/screens/Lists/Lists';
 import Settings from './src/screens/Settings/Settings.js';
-import View_Adopcion from './src/screens/View_Adopcion/View_Adopcion';
+import View_Adopcion from './src/screens/View_Adopcion/View_Adopcion'; //VIsta de adopcion
+import cardPost from './src/screens/ZonaPruebas/cardPost'; //para las cartas
+import cardPurple from './src/screens/ZonaPruebas/cardPurple';
 
 const AppStack = createDrawerNavigator({
 	Home: HomeScreen,
@@ -35,7 +36,9 @@ const AppStack = createDrawerNavigator({
 	ProfileEdit: ProfileEdit,
 	Lists: Lists,
 	Settings: Settings,
-	View_Adopcion: View_Adopcion
+	View_Adopcion: View_Adopcion,
+	cardPost: cardPost,
+	cardPurple: cardPurple
 });
 const AuthStack = createBottomTabNavigator({
 	Sign: SignInScreen,

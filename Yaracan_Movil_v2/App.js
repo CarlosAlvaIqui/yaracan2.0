@@ -26,6 +26,7 @@ import Settings from './src/screens/Settings/Settings.js';
 import View_Adopcion from './src/screens/View_Adopcion/View_Adopcion'; //VIsta de adopcion
 import cardPost from './src/screens/ZonaPruebas/cardPost'; //para las cartas
 import cardPurple from './src/screens/ZonaPruebas/cardPurple';
+import headerNavigation from './src/screens/menu_slide/header_buttons';
 
 const AppStack = createDrawerNavigator({
 	Home: HomeScreen,
@@ -49,7 +50,8 @@ export default createAppContainer(
 		{
 			AuthLoading: AuthLoadingScreen,
 			App: AppStack,
-			Auth: AuthStack
+			Auth: AuthStack,
+			header: headerNavigation
 		},
 		{
 			initialRouteName: 'AuthLoading'

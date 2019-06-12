@@ -18,7 +18,7 @@ import { Madoka } from 'react-native-textinput-effects';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import AsyncStorage from '@react-native-community/async-storage';
 import imgBackground from '../../assets/img/perritos.jpg';
-import axios from 'axios';
+import axios from '../../lib/axios';
 
 import FirebaseClient from '../../lib/FirebaseClient';
 import RNFetchBlob from 'react-native-fetch-blob';
@@ -172,7 +172,7 @@ export default class View_Adopcion extends React.Component {
 				//para subirlo al mongo db
 				axios({
 					method: 'POST',
-					url: 'http://172.23.15.232:8080/api/pet/',
+					url: 'api/pet/',
 					data: {
 						petname: this.state.petname,
 						sexo: this.state.sexo,

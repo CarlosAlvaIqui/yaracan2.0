@@ -47,7 +47,6 @@ export default class Posts extends Component {
 					});
 				}
 				this.setState({ webViewLoaded: false });
-				console.log('>>>>>>>>>>>>>>>>>' + this.state.data);
 			})
 			.catch(err => {
 				ToastAndroid.showWithGravity(
@@ -192,7 +191,7 @@ const styles = StyleSheet.create({
 	},
 	cardImage: {
 		flex: 1,
-		height: 150,
+		height: 500,
 		width: null
 	},
 	/******** card components **************/

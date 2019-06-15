@@ -1,139 +1,95 @@
 import React from 'react';
 import {
-	View,
-	Button,
+	AppRegistry,
+	Image,
+	PixelRatio,
+	StyleSheet,
 	Text,
-	ImageBackground,
 	TouchableOpacity,
-	ToastAndroid,
-	KeyboardAvoidingView,
-	TextInput,
-	StyleSheet
+	View
 } from 'react-native';
-import AwesomeButton from 'react-native-really-awesome-button';
-import { Hoshi } from 'react-native-textinput-effects';
+import ImagePicker from 'react-native-image-picker';
 
-import axios from 'axios';
-
-export default class ViewAdopcionScreen extends React.Component {
+export default class ViewAdopcion extends React.Component {
 	state = {
-		nombre: '',
-		raza: '',
-		sexo: '',
-		historia: ''
+		avatarSource: null
 	};
-	inputHandler = (field, value) => {
-		this.setState({ [field]: value });
-	};
+
+	constructor(props) {
+		super(props);
+
+		this.selectPhotoTapped = this.selectPhotoTapped.bind(this);
+	}
+
+	selectPhotoTapped() {
+		const options = {
+			quality: 1.0,
+			maxWidth: 500,
+			maxHeight: 500,
+			storageOptions: {
+				skipBackup: true
+			}
+		};
+
+		ImagePicker.showImagePicker(options, response => {
+			console.log('Response = ', response);
+
+			if (response.didCancel) {
+				console.log('User cancelled photo picker');
+			} else if (response.error) {
+				console.log('ImagePicker Error: ', response.error);
+			} else if (response.customButton) {
+				console.log('User tapped custom button: ', response.customButton);
+			} else {
+				let source = { uri: response.uri };
+
+				// You can also display the image using data:
+				// let source = { uri: 'data:image/jpeg;base64,' + response.data };
+
+				this.setState({
+					avatarSource: source
+				});
+			}
+		});
+	}
+
 	render() {
 		return (
-			<View style={{ flex: 1 }}>
-				<Text>Adopciones</Text>
-				<View>
-					<Hoshi
-						style={{
-							width: '100%',
-							backgroundColor: '#ffa138',
-							opacity: 0.8,
-							marginBottom: 10
-						}}
-						label={'Nombre del animal'}
-						labelStyle={{ color: 'white' }}
-						iconSize={30}
-						iconWidth={40}
-						inputPadding={16}
-						onChangeText={text => this.inputHandler('nombre', text)}
-						value={this.state.nombre}
-					/>
-					<Hoshi
-						style={{
-							width: '100%',
-							backgroundColor: '#ffa138',
-							opacity: 0.8,
-							marginBottom: 10
-						}}
-						label={'raza'}
-						labelStyle={{ color: 'white' }}
-						iconSize={30}
-						iconWidth={40}
-						inputPadding={16}
-						onChangeText={text => this.inputHandler('raza', text)}
-						value={this.state.raza}
-					/>
-					<Hoshi
-						style={{
-							width: '100%',
-							backgroundColor: '#ffa138',
-							opacity: 0.8,
-							marginBottom: 10
-						}}
-						label={'Sexo'}
-						labelStyle={{ color: 'white' }}
-						iconSize={30}
-						iconWidth={40}
-						inputPadding={16}
-						onChangeText={text => this.inputHandler('sexo', text)}
-						value={this.state.sexo}
-					/>
-					<Hoshi
-						style={{
-							width: '100%',
-							backgroundColor: '#ffa138',
-							opacity: 0.8,
-							marginBottom: 10
-						}}
-						label={'Historia'}
-						labelStyle={{ color: 'white' }}
-						iconSize={30}
-						iconWidth={40}
-						inputPadding={16}
-						onChangeText={text => this.inputHandler('historia', text)}
-						value={this.state.historia}
-					/>
-				</View>
-				<View style={styles.bottom}>
-					<View style={styles.bottomItem}>
-						<View style={styles.bottomItemInner}>
-							<AwesomeButton onPress={this.change_viewAdopcion}>
-								<Text>Dar en adopcion</Text>
-							</AwesomeButton>
-						</View>
+			<View style={styles.container}>
+				<TouchableOpacity onPress={this.selectPhotoTapped.bind(this)}>
+					<View
+						style={[
+							styles.avatar,
+							styles.avatarContainer,
+							{ marginBottom: 20 }
+						]}
+					>
+						{this.state.avatarSource === null ? (
+							<Text>Selecciona una Foto</Text>
+						) : (
+							<Image style={styles.avatar} source={this.state.avatarSource} />
+						)}
 					</View>
-				</View>
+				</TouchableOpacity>
 			</View>
 		);
 	}
 }
 
 const styles = StyleSheet.create({
-	containerflat: {
-		justifyContent: 'center',
-		alignItems: 'center'
-	},
-
-	top: {
-		height: '15%',
-		alignItems: 'center',
-		justifyContent: 'center'
-	},
-	bottom: {
-		height: '45%',
-		flexDirection: 'row',
-		flexWrap: 'wrap',
-		padding: 5
-	},
-	bottomItem: {
-		width: '50%',
-		height: '50%',
-		padding: 5
-	},
-	bottomItemInner: {
+	container: {
 		flex: 1,
-		opacity: 0.8,
+		justifyContent: 'center',
+		alignItems: 'center',
+		backgroundColor: '#F5FCFF'
+	},
+	avatarContainer: {
+		borderColor: '#9B9B9B',
 		justifyContent: 'center',
 		alignItems: 'center'
 	},
-	botoncolor: {
-		color: 'white'
+	avatar: {
+		width: 150,
+		height: 150
 	}
 });

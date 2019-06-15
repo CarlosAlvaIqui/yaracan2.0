@@ -1,4 +1,5 @@
 import React from 'react';
+import { footer } from 'react-bootstrap';
 
 const Footer = props => {
 	return (
@@ -28,4 +29,5 @@ const Footer = props => {
 		</footer>
 	);
 };
+
 export default Footer;

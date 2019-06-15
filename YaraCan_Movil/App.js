@@ -20,8 +20,9 @@ import ini_home from './src/screens/Ini_home/Ini_home';
 import Publicaciones_ls from './src/screens/Publicaciones_ls/Publicaciones_ls';
 import HomeScreen from './src/screens/Home/Home';
 import ChatScreen from './src/screens/Chat/Chat';
-import ViewAdopcionScreen from './src/screens/ViewAdopcion/ViewAdopcion';
-
+import ViewAdopcion from './src/screens/ViewAdopcion/ViewAdopcion';
+import View_AdopcionScreen from './src/screens/ViewAdopcion/View_Adopcion';
+import beta from './src/screens/ZonaPruebas/subirImagen';
 const AppStack = createDrawerNavigator({ Home: HomeScreen, Other: ChatScreen });
 const AuthStack = createBottomTabNavigator({
 	Sign: SignInScreen,
@@ -33,7 +34,9 @@ export default createAppContainer(
 			AuthLoading: AuthLoadingScreen,
 			App: AppStack,
 			Auth: AuthStack,
-			ViewAdopcion: ViewAdopcionScreen
+			View_Adopcion: View_AdopcionScreen,
+			ViewAdopcion: ViewAdopcion,
+			beta: beta
 		},
 		{
 			initialRouteName: 'AuthLoading'

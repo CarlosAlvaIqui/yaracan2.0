@@ -1,123 +1,16 @@
 const utils = require('../lib/utils');
 const Pet = require('../models/pets');
 
-const exposedFields = ['petname', 'sexo', 'raza', 'descripcion'];
+const exposedFields = [
+	'petname',
+	'sexo',
+	'raza',
+	'descripcion',
+	'urlImage',
+	'userPost'
+];
 
 module.exports = {
-	//
-	/*signup: (req, res, next) => {
-		var pet = new Pet({
-			...req.body
-		});
-		pet
-			.save()
-			.then(result => {
-				const token = utils.generateToken({
-					_id: result['_doc']['_id'],
-					name: result['_doc']['name'],
-					username: result['_doc']['username'],
-					email: result['_doc']['email']
-				});
-				const exposedData = utils.getCleanUser(result['_doc']);
-				res.status(200).json({
-					message: 'User succesfully signup!',
-					data: exposedData
-					//token: token
-				});
-			})
-			.catch(err => {
-				console.log(err);
-				res.status(500).json({
-					error: err
-				});
-			});
-	},
-	signin: (req, res, err) => {
-		User.findOne({ username: req.body.username })
-			.select(exposedFields.join(' ') + ' password')
-			.exec((err, user) => {
-				if (err) res.status(500).json(err);
-				if (!user) {
-					return res.status(401).json({
-						error: true,
-						message: 'Username or Password is wrong',
-						para_jose: 'esto es del usuario'
-					});
-				}
-				user
-					.comparePassword(req.body.password)
-					.then(valid => {
-						if (!valid) {
-							return res.status(401).json({
-								error: true,
-								message: 'Username or Password is wrong',
-								para_jose: 'esto es error de la contraseña'
-							});
-						}
-						res.json({
-							message: 'User seccesfully logged!',
-							data: user
-							//token: utils.generateToken(user) se produce un error al momento de intentar crear el token
-						});
-					})
-					.catch(err => {
-						res.status(500).json(err);
-					});
-			});
-    },
-  
-	refreshToken: (req, res, next) => {
-		var token = req.body.token || req.query.token;
-		if (!token) {
-			return res.status(401).json({ message: 'Must pass token' });
-		}
-
-		utils
-			.verifyToken(token)
-			.then(user => {
-				User.findById(
-					{
-						_id: user._id
-					},
-					function(err, user) {
-						if (err) throw err;
-
-						const exposedData = utils.getCleanUser(user['_doc']);
-						const newToken = utils.generateToken(exposedData);
-
-						res.status(200).json({
-							user: exposedData,
-							token: newToken
-						});
-					}
-				);
-			})
-			.catch(err => {
-				res.status(500).json(err);
-			});
-	},
-	verifyToken: (req, res, next) => {
-		const token = req.headers['authorization'];
-		if (!token)
-			res.status(401).json({
-				error: true,
-				message: 'Please register Log in using a valid email to submit posts'
-			});
-		utils
-			.verifyToken(token)
-			.then(function(user) {
-				req.user = user;
-				next();
-			})
-			.catch(function(err) {
-				console.log(err);
-				res.status(500).json({
-					error: err
-				});
-			});
-    },    
-*/
-
 	create: (req, res, next) => {
 		var pet = new Pet({
 			...req.body
@@ -140,16 +33,13 @@ module.exports = {
 			});
 	},
 	find: (req, res, next) => {
-		User.find()
-			.select(exposedFields.join(''))
+		Pet.find()
 			.exec()
 			.then(docs => {
 				const response = {
 					count: docs.length,
 					data: docs.map(doc => {
-						return {
-							...doc['_doc']
-						};
+						return { subData: doc['_doc'] };
 					})
 				};
 				res.status(200).json(response);
@@ -163,7 +53,7 @@ module.exports = {
 	},
 	findOne: (req, res, next) => {
 		const id = req.params.id;
-		User.findById(id)
+		Pet.findById(id)
 			.exec()
 			.then(doc => {
 				if (doc) {

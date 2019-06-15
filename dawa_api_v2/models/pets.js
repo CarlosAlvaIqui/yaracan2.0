@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-
 const petSchema = new Schema(
 	{
 		petname: {
@@ -18,9 +17,10 @@ const petSchema = new Schema(
 		descripcion: {
 			type: String
 		},
-		url: {
+		urlImage: {
 			type: String
-		}
+		},
+		userPost: []
 	},
 	{ timestamps: true }
 );

@@ -65,7 +65,6 @@ export default class SignInScreen extends React.Component {
 					ToastAndroid.LONG,
 					ToastAndroid.TOP
 				);
-				console.log('-----------------------> Logeo Existo');
 				await AsyncStorage.setItem('userToken', response.data.token);
 			})
 			.catch(err => {

@@ -37,7 +37,7 @@ export default class Posts extends Component {
 			url: 'api/pet/'
 		})
 			.then(async response => {
-				console.log('<>>>>>><><><>' + response.data.data[0]['raza']);
+				console.log('' + response.data.data[0]['raza']);
 				for (var i = 0; i < response.data.count; i++) {
 					this.state.data.push({
 						id: i,

@@ -7,10 +7,7 @@ import {
 	ImageBackground,
 	TouchableOpacity,
 	ToastAndroid,
-	KeyboardAvoidingView,
 	Image,
-	FlatList,
-	AppRegistry,
 	Platform
 } from 'react-native';
 import Icon from 'react-native-ionicons';

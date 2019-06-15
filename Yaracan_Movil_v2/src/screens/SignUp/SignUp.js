@@ -13,7 +13,7 @@ import { Hoshi } from 'react-native-textinput-effects';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import AsyncStorage from '@react-native-community/async-storage';
 import imgBackground from '../../assets/img/perritos.jpg';
-import axios from 'axios';
+import axios from '../../lib/axios';
 
 export default class SignUp extends React.Component {
 	static navigationOptions = {
@@ -49,18 +49,17 @@ export default class SignUp extends React.Component {
 	};
 
 	onSubmitHandler = () => {
-		/*if(this.state.user === '' || this.state.password === ''){
-            return ToastAndroid.showWithGravity(
-                'Falta ingresar datos!',
-                ToastAndroid.SHORT,
-                ToastAndroid.TOP
-            );
-        }
-    */
+		if (this.state.user === '' || this.state.password === '') {
+			return ToastAndroid.showWithGravity(
+				'Falta ingresar datos!',
+				ToastAndroid.SHORT,
+				ToastAndroid.TOP
+			);
+		}
 		this.setState({ loading: true });
 		axios({
 			method: 'POST',
-			url: 'http://192.168.0.12:8080/api/user/signup',
+			url: 'api/user/signup',
 			data: {
 				username: this.state.username,
 				password: this.state.password,

@@ -12,17 +12,14 @@ import {
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { Fumi } from 'react-native-textinput-effects';
 import { Input, Button } from 'react-native-elements';
-import imgBackground from '../../assets/img/perritos.jpg';
+import imgBackground from '../../assets/img/perritos2.jpg';
 import Icon from 'react-native-ionicons';
 import axios from '../../lib/axios';
 import AsyncStorage from '@react-native-community/async-storage';
 import { styles } from '../styles/global';
 export default class SignInScreen extends React.Component {
 	static navigationOptions = {
-		title: 'Inicie sesion',
-		tabBarIcon: ({ focused, horizontal, tintColor }) => {
-			return <Ionicons name="ios-contact" size={25} color={tintColor} />;
-		}
+		header: null
 	};
 	state = {
 		user: '',
@@ -80,15 +77,18 @@ export default class SignInScreen extends React.Component {
 	registerHandler = () => {
 		this.props.navigation.navigate('SignUp');
 	};
+	defrente = () => {
+		this.props.navigation.navigate('header');
+	};
 	render() {
 		return (
 			<View style={{ flex: 1 }}>
 				<ImageBackground
 					source={imgBackground}
-					style={{ width: '100%', height: '100%' }}
+					style={{ width: '100%', height: '100%', opacity: 0.9 }}
 				>
 					<ScrollView style={formStyles.container}>
-						<Text style={styles.subtitle}>Yara Can</Text>
+						<Text style={formStyles.subtitle}>Yara Can</Text>
 						<Input
 							placeholder="  Nombre de usuario"
 							leftIcon={{ type: 'font-awesome', name: 'user' }}
@@ -99,8 +99,9 @@ export default class SignInScreen extends React.Component {
 						<Input
 							placeholder="  contraseña"
 							leftIcon={{ type: 'font-awesome', name: 'key' }}
-							inputContainerStyle="marginTop: 10"
+							inputContainerStyle={formStyles.input}
 							value={this.state.password}
+							secureTextEntry={!this.state.showPassword}
 							onChangeText={text => this.inputHandler(text, 'password')}
 						/>
 						<Button
@@ -108,6 +109,32 @@ export default class SignInScreen extends React.Component {
 							containerStyle={formStyles.button}
 							onPress={this.onSubmitHandler}
 						/>
+						<View
+							style={{
+								marginTop: 10,
+								justifyContent: 'center',
+								alignItems: 'center',
+								alignSelf: 'center'
+							}}
+						>
+							<Text
+								style={{ color: '#fff', fontSize: 18 }}
+								style={formStyles.text}
+							>
+								No tienes una cuenta?
+								<Text
+									onPress={this.registerHandler}
+									style={{
+										color: '#fff',
+										fontSize: 20,
+										fontWeight: 'bold'
+									}}
+								>
+									{''}
+									Registrarse aquí!
+								</Text>
+							</Text>
+						</View>
 					</ScrollView>
 				</ImageBackground>
 			</View>
@@ -118,10 +145,21 @@ const formStyles = StyleSheet.create({
 	container: {
 		padding: 10
 	},
+	subtitle: {
+		color: '#fff',
+		fontSize: 40,
+		justifyContent: 'center',
+		alignItems: 'center',
+		alignSelf: 'center'
+	},
 	input: {
-		marginTop: 10
+		marginTop: 60
+	},
+	text: {
+		marginTop: 180,
+		color: '#fff'
 	},
 	button: {
-		marginTop: 10
+		marginTop: 90
 	}
 });

@@ -9,7 +9,14 @@ import {
 	TouchableOpacity
 } from 'react-native';
 
+import Ionicons from 'react-native-vector-icons/Ionicons';
 export default class App extends Component {
+	static navigationOptions = {
+		title: 'Bienvenido a la App!',
+		tabBarIcon: ({ focused, horizontal, tintColor }) => {
+			return <Ionicons name="ios-paper" size={25} color={tintColor} />;
+		}
+	};
 	constructor(props) {
 		super(props);
 
@@ -60,7 +67,7 @@ export default class App extends Component {
 						</View>
 					)}
 					//Aca configuras el numero de columnas q desas vers
-					numColumns={1}
+					numColumns={2}
 				/>
 			</View>
 		);

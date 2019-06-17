@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import {
 	StyleSheet,
 	View,
@@ -8,7 +8,8 @@ import {
 	TouchableOpacity,
 	ToastAndroid,
 	Image,
-	Platform
+	Platform,
+	ScrollView
 } from 'react-native';
 import Icon from 'react-native-ionicons';
 import { Madoka } from 'react-native-textinput-effects';
@@ -16,7 +17,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import AsyncStorage from '@react-native-community/async-storage';
 import imgBackground from '../../assets/img/perritos.jpg';
 import axios from '../../lib/axios';
-
+import { Input } from 'react-native-elements';
 import FirebaseClient from '../../lib/FirebaseClient';
 import RNFetchBlob from 'react-native-fetch-blob';
 
@@ -39,7 +40,6 @@ window.Blob = Blob;
 
 export default class View_Adopcion extends React.Component {
 	static navigationOptions = {
-		title: 'Bienvenido a la App!',
 		tabBarIcon: ({ focused, horizontal, tintColor }) => {
 			return <Ionicons name="ios-clipboard" size={25} color={tintColor} />;
 		}
@@ -222,130 +222,116 @@ export default class View_Adopcion extends React.Component {
 		return (
 			<View style={{ flex: 1 }}>
 				<ImageBackground
-					source={imgBackground}
-					style={{ width: '100%', height: '100%' }}
+					style={{ width: '100%', height: '100%', color: 'black' }}
 				>
-					<Text
-						style={{
-							textAlign: 'center',
-							fontWeight: 'bold',
-							fontSize: 26,
-							color: '#fff'
-						}}
-					>
-						Registros
-					</Text>
-					<View style={{ padding: 5 }}>
-						<View style={{ marginTop: 5 }}>
-							<View>
-								<Madoka
-									style={{
-										width: '100%',
-										opacity: 0.8,
-										marginBottom: 10
-									}}
-									label={'Nombre de la mascota'}
-									iconClass={Icon}
-									iconColor={'#fff'}
-									onChangeText={text => this.inputHandler('petname', text)}
-									labelStyle={{ color: 'white' }}
-									iconSize={30}
-									iconWidth={40}
-									inputPadding={16}
-									value={this.state.petname}
-								/>
-								<Madoka
-									style={{
-										width: '100%',
-										opacity: 0.8,
-										marginBottom: 10
-									}}
-									label={'Sexo'}
-									iconClass={Icon}
-									iconName={'person'}
-									iconColor={'#fff'}
-									onChangeText={text => this.inputHandler('sexo', text)}
-									labelStyle={{ color: 'white' }}
-									iconSize={30}
-									iconWidth={40}
-									inputPadding={16}
-									value={this.state.sexo}
-								/>
-							</View>
-							<View style={{ flexDirection: 'row' }}>
-								<Madoka
-									style={{
-										width: '100%',
-										opacity: 0.8
-									}}
-									label={'Raza'}
-									labelStyle={{ color: 'white' }}
-									onChangeText={text => this.inputHandler('raza', text)}
-									iconClass={Icon}
-									iconName={'key'}
-									iconColor={'#fff'}
-									iconSize={30}
-									iconWidth={40}
-									inputPadding={16}
-									value={this.state.raza}
-								/>
-							</View>
-							<View style={{ flexDirection: 'row' }}>
-								<Madoka
-									style={{
-										marginTop: 10,
-										width: '100%',
-										opacity: 0.8
-									}}
-									label={'Descripcion'}
-									labelStyle={{ color: 'white' }}
-									onChangeText={text => this.inputHandler('descripcion', text)}
-									iconClass={Icon}
-									iconName={'key'}
-									iconColor={'#fff'}
-									iconSize={30}
-									iconWidth={40}
-									inputPadding={16}
-									value={this.state.descripcion}
-								/>
-							</View>
-							<TouchableOpacity
-								onPress={this.onSubmitHandler}
-								style={{
-									marginTop: 10,
-									padding: 15,
-									justifyContent: 'center',
-									alignItems: 'center',
-									borderRadius: 25,
-									backgroundColor: '#dcdcdc'
-								}}
-							>
-								<Text
-									style={{
-										color: '#46494f',
-										fontSize: 15,
-										fontWeight: 'bold'
-									}}
-								>
-									Publicar
-								</Text>
-							</TouchableOpacity>
-						</View>
-					</View>
-					<View style={styles.container}>
-						<Text style={styles.welcome}>
-							Seleccione una foto de su mascota.
+					<ScrollView>
+						<Text
+							style={{
+								textAlign: 'center',
+								fontWeight: 'bold',
+								fontSize: 26,
+								color: 'black'
+							}}
+						>
+							Registros
 						</Text>
-						<Image
-							style={{ width: 100, height: 100 }}
-							source={{ uri: this.state.sourceImagePet }}
-						/>
-						<Button
-							onPress={this.getImage}
-							title="Cambiar Imagen"
-							color="#841584"
-						/>
-					</View>
+						<View style={styles.card}>
+							<View style={{ padding: 5 }}>
+								<View style={{ marginTop: 5 }}>
+									<View>
+										<Input
+											placeholder="Nombre de mascota"
+											leftIcon={{ type: 'material', name: 'pets' }}
+											inputContainerStyle={formStyles.input}
+											value={this.state.petname}
+											onChangeText={text => this.inputHandler('petname', text)}
+										/>
+										<Input
+											placeholder="Sexo"
+											leftIcon={{ type: 'material', name: 'pets' }}
+											inputContainerStyle={formStyles.input}
+											value={this.state.sexo}
+											onChangeText={text => this.inputHandler('sexo', text)}
+										/>
+										<Input
+											placeholder="Raza"
+											leftIcon={{ type: 'material', name: 'pets' }}
+											inputContainerStyle={formStyles.input}
+											value={this.state.raza}
+											onChangeText={text => this.inputHandler('raza', text)}
+										/>
+										<Input
+											placeholder="Descripcion"
+											leftIcon={{ type: 'material', name: 'pets' }}
+											inputContainerStyle={formStyles.input}
+											value={this.state.descripcion}
+											onChangeText={text =>
+												this.inputHandler('descripcion', text)
+											}
+										/>
+									</View>
+
+									<TouchableOpacity
+										onPress={this.getImage}
+										style={{
+											justifyContent: 'center',
+											alignItems: 'center',
+											backgroundColor: 'white'
+										}}
+									>
+										<Text
+											style={{
+												textAlign: 'center',
+												fontWeight: 'bold',
+												fontSize: 20,
+												color: 'black'
+											}}
+										>
+											Imagen de la mascota
+										</Text>
+									</TouchableOpacity>
+									<TouchableOpacity
+										style={{
+											justifyContent: 'center',
+											alignItems: 'center',
+											backgroundColor: 'white'
+										}}
+									>
+										<Image
+											style={{
+												width: 100,
+												height: 100,
+												justifyContent: 'center',
+												alignItems: 'center'
+											}}
+											source={{ uri: this.state.sourceImagePet }}
+										/>
+									</TouchableOpacity>
+									<TouchableOpacity
+										onPress={this.onSubmitHandler}
+										style={{
+											marginTop: 10,
+											padding: 15,
+											justifyContent: 'center',
+											alignItems: 'center',
+											borderRadius: 25,
+											backgroundColor: '#81CDF3'
+										}}
+									>
+										<Text
+											style={{
+												color: 'white',
+												fontSize: 20,
+												fontWeight: 'bold'
+											}}
+										>
+											Publicar
+										</Text>
+									</TouchableOpacity>
+								</View>
+							</View>
+						</View>
+					</ScrollView>
 				</ImageBackground>
 			</View>
 		);
@@ -368,5 +354,26 @@ const styles = StyleSheet.create({
 		textAlign: 'center',
 		color: '#333333',
 		marginBottom: 5
+	},
+	card: {
+		shadowColor: '#00000021',
+		shadowOffset: {
+			width: 2
+		},
+		shadowOpacity: 0.5,
+		shadowRadius: 4,
+		marginVertical: 8,
+		backgroundColor: 'white'
+	}
+});
+const formStyles = StyleSheet.create({
+	container: {
+		padding: 10
+	},
+	input: {
+		marginTop: 10
+	},
+	button: {
+		marginTop: 10
 	}
 });

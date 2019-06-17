@@ -13,30 +13,33 @@ import viewHeader from '../ZonaPruebas/cardPost';
 import profile from '../Profile/Profile';
 import view_adopciones from '../View_Adopcion/View_Adopcion';
 import Bar_buttons2 from '../menu_slide/bar_buttons';
-
+import Icon from 'react-native-ionicons';
+import Icons from 'react-native-vector-icons/FontAwesome';
 const Mi_top_bar = createMaterialTopTabNavigator(
 	{
 		Sing1: {
 			screen: viewHeader,
-			navigationOptions: { header: null, title: 'Publicaciones' }
+			navigationOptions: { header: null }
 		},
 		Sing2: {
 			screen: view_adopciones,
-			navigationOptions: { header: null, title: 'Adopcion' }
+			navigationOptions: { header: null }
 		},
 		Sing3: {
 			screen: Bar_buttons2,
-			navigationOptions: { header: null, title: 'Messages3' }
+			navigationOptions: { header: null }
 		},
 		Sing4: {
 			screen: profile,
-			navigationOptions: { header: null, title: 'Perfil' }
+			navigationOptions: { header: null }
 		}
 	},
 	{
 		tabBarPosition: 'top',
 		tabBarOptions: {
-			activeTintColor: '#0084ff'
+			activeTintColor: '#0084ff',
+			showIcon: true,
+			showLabel: false
 		}
 	}
 );

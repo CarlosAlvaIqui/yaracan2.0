@@ -23,6 +23,7 @@
     "react-native-image-picker": "^0.28.1",
     "react-native-ionicons": "^4.5.6",
     "react-native-maps": "^0.24.2",
+    "react-native-scl-alert": "^1.2.1",
     "react-native-textinput-effects": "^0.5.1",
     "react-native-vector-icons": "^6.4.2",
     "react-navigation": "^3.9.1",

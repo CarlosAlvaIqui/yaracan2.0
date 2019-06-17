@@ -10,6 +10,7 @@ import {
 	createSwitchNavigator,
 	createDrawerNavigator,
 	createAppContainer,
+	createStackNavigator,
 	createBottomTabNavigator
 } from 'react-navigation';
 
@@ -27,13 +28,14 @@ import View_Adopcion from './src/screens/View_Adopcion/View_Adopcion'; //VIsta d
 import cardPost from './src/screens/ZonaPruebas/cardPost'; //para las cartas
 import cardPurple from './src/screens/ZonaPruebas/cardPurple';
 import headerNavigation from './src/screens/menu_slide/header_buttons';
+import Alert from './src/screens/ZonaPruebas/alert';
+import AlertConfig from './src/screens/ZonaPruebas/AlertConfig';
 
 const AppStack = createDrawerNavigator({
 	Home: HomeScreen,
 	Chat: ChatScreen,
 	Camera: Camera,
 	Map: Map,
-	Profile: Profile,
 	ProfileEdit: ProfileEdit,
 	Lists: Lists,
 	Settings: Settings,
@@ -41,9 +43,10 @@ const AppStack = createDrawerNavigator({
 	cardPost: cardPost,
 	cardPurple: cardPurple
 });
-const AuthStack = createBottomTabNavigator({
+const AuthStack = createStackNavigator({
 	Sign: SignInScreen,
-	SignUp: SignUpScreen
+	SignUp: SignUpScreen,
+	Profile: ProfileEdit
 });
 export default createAppContainer(
 	createSwitchNavigator(
@@ -51,7 +54,8 @@ export default createAppContainer(
 			AuthLoading: AuthLoadingScreen,
 			App: AppStack,
 			Auth: AuthStack,
-			header: headerNavigation
+			header: headerNavigation,
+			Alert: Alert
 		},
 		{
 			initialRouteName: 'AuthLoading'

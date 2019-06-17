@@ -19,10 +19,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 import { styles } from '../styles/global';
 export default class SignInScreen extends React.Component {
 	static navigationOptions = {
-		title: 'Inicie sesion',
-		tabBarIcon: ({ focused, horizontal, tintColor }) => {
-			return <Ionicons name="ios-contact" size={25} color={tintColor} />;
-		}
+		header: null
 	};
 	state = {
 		user: '',
@@ -108,6 +105,32 @@ export default class SignInScreen extends React.Component {
 							containerStyle={formStyles.button}
 							onPress={this.onSubmitHandler}
 						/>
+						<View
+							style={{
+								marginTop: 10,
+								justifyContent: 'center',
+								alignItems: 'center',
+								alignSelf: 'center'
+							}}
+						>
+							<Text
+								style={{ color: '#fff', fontSize: 18 }}
+								style={formStyles.text}
+							>
+								No tienes una cuenta?
+								<Text
+									onPress={this.registerHandler}
+									style={{
+										color: '#fff',
+										fontSize: 20,
+										fontWeight: 'bold'
+									}}
+								>
+									{''}
+									Registrarse aquí!
+								</Text>
+							</Text>
+						</View>
 					</ScrollView>
 				</ImageBackground>
 			</View>
@@ -118,10 +141,21 @@ const formStyles = StyleSheet.create({
 	container: {
 		padding: 10
 	},
+	subtitle: {
+		color: '#fff',
+		fontSize: 40,
+		justifyContent: 'center',
+		alignItems: 'center',
+		alignSelf: 'center'
+	},
 	input: {
-		marginTop: 10
+		marginTop: 60
+	},
+	text: {
+		marginTop: 180,
+		color: '#fff'
 	},
 	button: {
-		marginTop: 10
+		marginTop: 90
 	}
 });

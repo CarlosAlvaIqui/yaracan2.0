@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import React, { Component } from 'react';
 import { NavigationBar } from 'navigationbar-react-native';
-
+import Ionicons from 'react-native-vector-icons/Ionicons';
 const ComponentLeft = () => {
 	return (
 		<View style={{ flex: 1, alignItems: 'flex-start' }}>
@@ -49,6 +49,12 @@ const ComponentRights = () => {
 };
 
 class Appxd extends React.Component {
+	static navigationOptions = {
+		title: 'Bienvenido a la App!',
+		tabBarIcon: ({ focused, horizontal, tintColor }) => {
+			return <Ionicons name="ios-paper" size={25} color={tintColor} />;
+		}
+	};
 	render() {
 		return (
 			<View>

@@ -14,8 +14,15 @@ import {
 import axios from '../../lib/axios';
 import AsyncStorage from '@react-native-community/async-storage';
 import { formatTestResults } from '@jest/test-result';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 export default class Posts extends Component {
+	static navigationOptions = {
+		title: 'Bienvenido a la App!',
+		tabBarIcon: ({ focused, horizontal, tintColor }) => {
+			return <Ionicons name="ios-notifications" size={25} color={tintColor} />;
+		}
+	};
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -37,13 +44,19 @@ export default class Posts extends Component {
 			url: 'api/pet/'
 		})
 			.then(async response => {
-				console.log('' + response.data.data[0]['raza']);
+				console.log(
+					'<><>>>>>>>>' +
+						response.data.data[0]['subData']['userPost'][0]['userName']
+				);
 				for (var i = 0; i < response.data.count; i++) {
 					this.state.data.push({
 						id: i,
 						title: '' + response.data.data[i]['subData']['descripcion'],
 						image: '' + response.data.data[i]['subData']['urlImage'],
-						time: '' + response.data.data[i]['subData']['createdAt']
+						time: '' + response.data.data[i]['subData']['createdAt'],
+						userName:
+							response.data.data[i]['subData']['userPost'][0]['userName'],
+						email: response.data.data[i]['subData']['userPost'][0]['emailUser']
 					});
 				}
 				this.setState({ webViewLoaded: false });
@@ -54,11 +67,10 @@ export default class Posts extends Component {
 					ToastAndroid.LONG,
 					ToastAndroid.TOP
 				);
-				console.log('<<<<<<<<<<<<<<<<<<<<<<<<<<' + err);
+				console.log('' + err);
 				this.setState({ loading: false });
 			});
 	};
-
 	render() {
 		return (
 			<View style={styles.container}>
@@ -79,9 +91,36 @@ export default class Posts extends Component {
 							return (
 								<View style={styles.card}>
 									<View style={styles.cardHeader}>
-										<View>
-											<Text style={styles.title}>{item.title}</Text>
-											<Text style={styles.time}>{item.time}</Text>
+										<View
+											onStartShouldSetResponder={() =>
+												Alert.alert(
+													'Dueño de la mascota: ' + item.userName,
+													'Descripcion: ' +
+														item.title +
+														'\n\nTelefono: ' +
+														'\n\nEmail: ' +
+														item.email,
+													[
+														{
+															text: 'Enviar mensaje',
+															onPress: () => console.log('later pressed')
+														},
+														{
+															text: 'Cancel',
+															onPress: () => console.log('Cancel Pressed'),
+															style: 'cancel'
+														},
+														{
+															text: 'OK',
+															onPress: () => console.log('OK Pressed')
+														}
+													],
+													{ cancelable: false }
+												)
+											}
+										>
+											<Text style={styles.title}>{item.userName}</Text>
+											<Text style={styles.time}>{item.title}</Text>
 										</View>
 									</View>
 

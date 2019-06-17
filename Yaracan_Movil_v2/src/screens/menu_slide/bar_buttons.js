@@ -50,7 +50,6 @@ const ComponentRights = () => {
 
 class Appxd extends React.Component {
 	static navigationOptions = {
-		title: 'Bienvenido a la App!',
 		tabBarIcon: ({ focused, horizontal, tintColor }) => {
 			return <Ionicons name="ios-paper" size={25} color={tintColor} />;
 		}

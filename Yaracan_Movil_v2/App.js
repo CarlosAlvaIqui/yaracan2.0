@@ -32,7 +32,7 @@ import Alert from './src/screens/ZonaPruebas/alert';
 import AlertConfig from './src/screens/ZonaPruebas/AlertConfig';
 
 const AppStack = createDrawerNavigator({
-	Home: HomeScreen,
+	Home: headerNavigation,
 	Chat: ChatScreen,
 	Camera: Camera,
 	Map: Map,

@@ -54,7 +54,6 @@ class ProfileEdit extends Component {
 	static navigationsOptions = {
 		drawerLabel: () => null
 	};
-
 	componentDidMount = async () => {
 		const userName = await AsyncStorage.getItem('userName');
 		const userEmail = await AsyncStorage.getItem('userEmail');
@@ -78,15 +77,22 @@ class ProfileEdit extends Component {
 					placeholder="Nombre de usuario"
 					leftIcon={{ type: 'font-awesome', name: 'user' }}
 					inputContainerStyle={formStyles.input}
-					value={this.state.userName}
-					onChangeText={text => this.inputHandler(text, 'userName')}
+					/*value={this.state.userName}
+					onChangeText={text => this.inputHandler(text, 'userName')}*/
 				/>
 				<Input
 					placeholder="Correo Electronico"
 					leftIcon={{ type: 'font-awesome', name: 'envelope' }}
 					inputContainerStyle={formStyles.input}
-					value={this.state.userEmail}
-					onChangeText={text => this.inputHandler(text, 'userEmail')}
+					/*value={this.state.userEmail}
+					onChangeText={text => this.inputHandler(text, 'userEmail')}*/
+				/>
+				<Input
+					placeholder="Correo Electronico"
+					leftIcon={{ type: 'font-awesome', name: 'envelope' }}
+					inputContainerStyle={formStyles.input}
+					/*value={this.state.userEmail}
+					onChangeText={text => this.inputHandler(text, 'userEmail')}*/
 				/>
 				<Input
 					placeholder="Telefono"

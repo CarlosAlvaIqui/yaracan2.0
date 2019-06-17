@@ -3,111 +3,30 @@ import { footer } from 'react-bootstrap';
 
 const Footer = props => {
 	return (
-
-		<footer id="footer" class="page-footer font-small indigo ">
-
-			<div class="container text-center text-md-left">
-
-
-				<div class="row">
-
-
-					<div class="col-md-3 mx-auto">
-
-
-						<h5 class="font-weight-bold text-uppercase mt-3 mb-4">Acerca de</h5>
-
-						<ul class="list-unstyled">
-							<li>
-								<a href="#!">Very long link 1</a>
-							</li>
-							<li>
-								<a href="#!">Very long link 2</a>
-							</li>
-							<li>
-								<a href="#!">Very long link 3</a>
-							</li>
-							<li>
-								<a href="#!">Very long link 4</a>
-							</li>
-						</ul>
-
+		<footer id="footer" className="pb-4 pt-4">
+			<div className="container">
+				<div className="row text-center">
+					<div className="col-12 col-lg">
+						<a href="#">Acerca De</a>
 					</div>
-
-					<div class="col-md-3 mx-auto">
-
-
-						<h5 class="font-weight-bold text-uppercase mt-3 mb-4">Nosotros</h5>
-
-						<ul class="list-unstyled">
-							<li>
-								<a href="#!">Link 1</a>
-							</li>
-							<li>
-								<a href="#!">Link 2</a>
-							</li>
-							<li>
-								<a href="#!">Link 3</a>
-							</li>
-							<li>
-								<a href="#!">Link 4</a>
-							</li>
-						</ul>
-
+					<div className="col-12 col-lg">
+						<a href="#">Contactanos</a>
 					</div>
-
-					<div class="col-md-3 mx-auto">
-
-
-						<h5 class="font-weight-bold text-uppercase mt-3 mb-4">Ayuda</h5>
-
-						<ul class="list-unstyled">
-							<li>
-								<a href="#!">Link 1</a>
-							</li>
-							<li>
-								<a href="#!">Link 2</a>
-							</li>
-							<li>
-								<a href="#!">Link 3</a>
-							</li>
-							<li>
-								<a href="#!">Link 4</a>
-							</li>
-						</ul>
-
+					<div className="col-12 col-lg">
+						<a href="#">Terminos y Condiciones</a>
 					</div>
-
-					<div class="col-md-3 mx-auto">
-
-						<h5 class="font-weight-bold text-uppercase mt-3 mb-4">Intereses</h5>
-
-						<ul class="list-unstyled">
-							<li>
-								<a href="#!">Link 1</a>
-							</li>
-							<li>
-								<a href="#!">Link 2</a>
-							</li>
-							<li>
-								<a href="#!">Link 3</a>
-							</li>
-							<li>
-								<a href="#!">Link 4</a>
-							</li>
-						</ul>
-
+					<div className="col-12 col-lg">
+						<a href="#">Privacidad</a>
 					</div>
-
+					<div className="col-12 col-lg">
+						<a href="#">MegaFuxion</a>
+					</div>
 				</div>
-
-
-			</div>
-			<div class="footer-copyright text-center py-3">© 2018 Copyright:
-    <a href="https://mdbootstrap.com/education/bootstrap/"> MDBootstrap.com</a>
+				<div class="row">
+					<div />
+				</div>
 			</div>
 		</footer>
-
 	);
 };
 

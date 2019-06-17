@@ -12,7 +12,6 @@ import loadingGif from '../../assets/img/loading.gif';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 class Profile extends Component {
 	static navigationOptions = {
-		title: 'Bienvenido a la App!',
 		tabBarIcon: ({ focused, horizontal, tintColor }) => {
 			return <Ionicons name="ios-person" size={25} color={tintColor} />;
 		}
@@ -22,6 +21,7 @@ class Profile extends Component {
 		userName: '',
 		userEmail: ''
 	};
+
 	componentDidMount = async () => {
 		const userName = await AsyncStorage.getItem('userName');
 		const userEmail = await AsyncStorage.getItem('userEmail');
@@ -34,6 +34,7 @@ class Profile extends Component {
 	editProfileHandler = () => {
 		this.props.navigation.navigate('ProfileEdit');
 	};
+
 	render() {
 		return (
 			<ScrollView>

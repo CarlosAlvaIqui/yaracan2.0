@@ -18,7 +18,6 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 
 export default class Posts extends Component {
 	static navigationOptions = {
-		title: 'Bienvenido a la App!',
 		tabBarIcon: ({ focused, horizontal, tintColor }) => {
 			return <Ionicons name="ios-notifications" size={25} color={tintColor} />;
 		}
@@ -33,6 +32,7 @@ export default class Posts extends Component {
 		};
 	}
 	componentDidMount = async () => {
+		this.forceUpdate();
 		const userName = await AsyncStorage.getItem('userName');
 		const userEmail = await AsyncStorage.getItem('userEmail');
 		this.setState({

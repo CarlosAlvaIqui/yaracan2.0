@@ -117,7 +117,6 @@ export default class SignUp extends React.Component {
 							value={this.state.email}
 							onChangeText={text => this.inputHandler('email', text)}
 						/>
-
 						<Input
 							placeholder="contraseña"
 							leftIcon={{ type: 'font-awesome', name: 'key' }}

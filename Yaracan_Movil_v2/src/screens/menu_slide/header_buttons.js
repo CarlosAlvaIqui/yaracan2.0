@@ -19,28 +19,27 @@ const Mi_top_bar = createMaterialTopTabNavigator(
 	{
 		Sing1: {
 			screen: viewHeader,
-			navigationOptions: {
-				tabBarLabel: 'Profile Page'
-			}
+			navigationOptions: { header: null }
 		},
 		Sing2: {
 			screen: view_adopciones,
-			navigationOptions: { header: null, title: 'Adopcion' }
+			navigationOptions: { header: null }
 		},
 		Sing3: {
 			screen: Bar_buttons2,
-			navigationOptions: { header: null, title: 'Messages3' }
+			navigationOptions: { header: null }
 		},
 		Sing4: {
 			screen: profile,
-			navigationOptions: { header: null, title: 'Perfil' }
+			navigationOptions: { header: null }
 		}
 	},
 	{
 		tabBarPosition: 'top',
 		tabBarOptions: {
 			activeTintColor: '#0084ff',
-			showIcon: true
+			showIcon: true,
+			showLabel: false
 		}
 	}
 );

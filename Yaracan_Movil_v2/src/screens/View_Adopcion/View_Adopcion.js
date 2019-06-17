@@ -8,7 +8,8 @@ import {
 	TouchableOpacity,
 	ToastAndroid,
 	Image,
-	Platform
+	Platform,
+	ScrollView
 } from 'react-native';
 import Icon from 'react-native-ionicons';
 import { Madoka } from 'react-native-textinput-effects';
@@ -41,7 +42,7 @@ export default class View_Adopcion extends React.Component {
 	static navigationOptions = {
 		title: 'Bienvenido a la App!',
 		tabBarIcon: ({ focused, horizontal, tintColor }) => {
-			return <Ionicons name="ios-clipboard" size={25} color={tintColor} />;
+			return <Ionicons name="ios-paw" size={25} color={tintColor} />;
 		}
 	};
 	constructor() {
@@ -225,6 +226,7 @@ export default class View_Adopcion extends React.Component {
 					source={imgBackground}
 					style={{ width: '100%', height: '100%' }}
 				>
+					<ScrollView>
 					<Text
 						style={{
 							textAlign: 'center',
@@ -346,6 +348,7 @@ export default class View_Adopcion extends React.Component {
 							color="#841584"
 						/>
 					</View>
+					</ScrollView>
 				</ImageBackground>
 			</View>
 		);

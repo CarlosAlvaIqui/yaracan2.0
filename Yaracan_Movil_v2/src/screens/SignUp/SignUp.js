@@ -2,14 +2,15 @@ import React from 'react';
 import {
 	StyleSheet,
 	View,
-	Button,
 	Text,
 	ImageBackground,
 	TouchableOpacity,
-	ToastAndroid
+	ToastAndroid,
+	ScrollView
 } from 'react-native';
 import Icon from 'react-native-ionicons';
 import { Hoshi } from 'react-native-textinput-effects';
+import { Input, Button } from 'react-native-elements';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import AsyncStorage from '@react-native-community/async-storage';
 import imgBackground from '../../assets/img/perritos.jpg';
@@ -17,7 +18,7 @@ import axios from '../../lib/axios';
 
 export default class SignUp extends React.Component {
 	static navigationOptions = {
-		title: 'Bienvenido a la App!',
+		title: 'Regresar',
 		tabBarIcon: ({ focused, horizontal, tintColor }) => {
 			return <Ionicons name="ios-clipboard" size={25} color={tintColor} />;
 		}
@@ -93,6 +94,55 @@ export default class SignUp extends React.Component {
 
 	render() {
 		return (
+			<View style={{ flex: 1 }}>
+				<ImageBackground
+					source={imgBackground}
+					style={{ width: '100%', height: '100%' }}
+				>
+					<ScrollView style={formStyles.container}>
+						<Text style={formStyles.subtitle}>Registro</Text>
+						<Input
+							placeholder="  Nombre de usuario"
+							leftIcon={{ type: 'font-awesome', name: 'user' }}
+							inputContainerStyle={formStyles.input}
+							value={this.state.username}
+							onChangeText={text => this.inputHandler('username', text)}
+						/>
+						<Input
+							placeholder=" Email "
+							leftIcon={{ type: 'font-awesome', name: 'user' }}
+							inputContainerStyle={formStyles.input}
+							value={this.state.email}
+							onChangeText={text => this.inputHandler('email', text)}
+						/>
+								
+						<Input
+							placeholder="contraseña"
+							leftIcon={{ type: 'font-awesome', name: 'key' }}
+							inputContainerStyle={formStyles.input}
+							value={this.state.password}
+							secureTextEntry={!this.state.showPassword}
+							onChangeText={text => this.inputHandler('password', text)}
+						/>
+
+						<Input
+							placeholder="contraseña"
+							leftIcon={{ type: 'font-awesome', name: 'key' }}
+							inputContainerStyle={formStyles.input}
+							value={this.state.password}
+							secureTextEntry={!this.state.showPassword}
+							onChangeText={text => this.inputHandler(text, 'password')}
+						/>
+						<Button
+							title="Iniciar Sesion"
+							containerStyle={formStyles.button}
+							onPress={this.onSubmitHandler}
+						/>
+					</ScrollView>
+				</ImageBackground>
+			</View>
+			
+			/*
 			<View style={{ flex: 1 }}>
 				<ImageBackground
 					source={imgBackground}
@@ -213,7 +263,7 @@ export default class SignUp extends React.Component {
 						</View>
 					</View>
 				</ImageBackground>
-			</View>
+			</View>*/
 		);
 	}
 }
@@ -248,5 +298,23 @@ const styles = StyleSheet.create({
 	},
 	botoncolor: {
 		color: 'white'
+	}
+});
+const formStyles = StyleSheet.create({
+	container: {
+		padding: 10
+	},
+	subtitle:{
+		color: '#fff',
+		fontSize: 40,
+		justifyContent: 'center',
+		alignItems: 'center',
+		alignSelf: 'center'
+	},
+	input: {
+		marginTop: 35
+	},
+	button: {
+		marginTop: 10
 	}
 });

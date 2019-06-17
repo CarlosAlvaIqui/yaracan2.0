@@ -10,7 +10,8 @@ import {
 	createSwitchNavigator,
 	createDrawerNavigator,
 	createAppContainer,
-	createBottomTabNavigator
+	createBottomTabNavigator,
+	createStackNavigator
 } from 'react-navigation';
 
 import AuthLoadingScreen from './src/screens/AuthLoadingScreen/AuthLoadingScreen';
@@ -27,9 +28,10 @@ import View_Adopcion from './src/screens/View_Adopcion/View_Adopcion'; //VIsta d
 import cardPost from './src/screens/ZonaPruebas/cardPost'; //para las cartas
 import cardPurple from './src/screens/ZonaPruebas/cardPurple';
 import headerNavigation from './src/screens/menu_slide/header_buttons';
+import changepro from './src/screens/menu_slide/stack_profile';
 
 const AppStack = createDrawerNavigator({
-	Home: HomeScreen,
+	Home: headerNavigation,
 	Chat: ChatScreen,
 	Camera: Camera,
 	Map: Map,
@@ -39,19 +41,21 @@ const AppStack = createDrawerNavigator({
 	Settings: Settings,
 	View_Adopcion: View_Adopcion,
 	cardPost: cardPost,
-	cardPurple: cardPurple
+	cardPurple: cardPurple,
 });
-const AuthStack = createBottomTabNavigator({
+const AuthStack = createStackNavigator({
 	Sign: SignInScreen,
-	SignUp: SignUpScreen
-});
+	SignUp: SignUpScreen,
+	});
+
 export default createAppContainer(
 	createSwitchNavigator(
 		{
 			AuthLoading: AuthLoadingScreen,
 			App: AppStack,
 			Auth: AuthStack,
-			header: headerNavigation
+			header: headerNavigation,
+			changeto: changepro
 		},
 		{
 			initialRouteName: 'AuthLoading'

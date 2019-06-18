@@ -1,102 +1,52 @@
-import React from 'react';
-import { Image, Card, Button } from 'react-bootstrap';
-import dog from '../Assets/Images/dog.jpg';
+import React, { Component } from 'react';
+import axios from '../utils/axios';
+import Carspet from '../Components/CarsPet/Carspet';
+import { CardGroup, Card } from 'react-bootstrap';
 
-const Home = props => {
-	return (
-		<div className="container-fluid">
-			{/* Seccion paara mostrar imagenes y descripcion de los paquetes */}
-			<section>
-				<div className="row" />
-				<div class="row">
-					<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-						<div class="row justify-content-center mt-4">
-							<div class="col-10">
-								<Card border="warning">
-									<Card.Img variant="top" src={dog} height="200" />
-									<Card.Body>
-										<Card.Title>
-											<h5 align="center">Primer Paquete</h5>
-										</Card.Title>
-										<Card.Text>
-											Some quick example text to build on the card title and
-											make up the bulk of the card's content.
-										</Card.Text>
-										<Button variant="info" size="lg" block>
-											Informacion
-										</Button>
-									</Card.Body>
-								</Card>
-							</div>
-						</div>
-					</div>
-					<div className="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-						<div class="row justify-content-center mt-4">
-							<div class="col-10">
-								<Card border="warning">
-									<Card.Img variant="top" src={dog} height="200" />
-									<Card.Body>
-										<Card.Title>
-											<h5 align="center">Segundo Paquete</h5>
-										</Card.Title>
-										<Card.Text>
-											Some quick example text to build on the card title and
-											make up the bulk of the card's content.
-										</Card.Text>
-										<Button variant="info" size="lg" block>
-											Informacion
-										</Button>
-									</Card.Body>
-								</Card>
-							</div>
-						</div>
-					</div>
-					<div className="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-						<div class="row justify-content-center mt-4">
-							<div class="col-10">
-								<Card border="warning">
-									<Card.Img variant="top" src={dog} height="200" />
-									<Card.Body>
-										<Card.Title>
-											<h5 align="center">Tercer Paquete</h5>
-										</Card.Title>
-										<Card.Text>
-											Some quick example text to build on the card title and
-											make up the bulk of the card's content.
-										</Card.Text>
-										<Button variant="info" size="lg" block>
-											Informacion
-										</Button>
-									</Card.Body>
-								</Card>
-							</div>
-						</div>
-					</div>
-					<div className="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-						<div class="row justify-content-center mt-4 mb-5">
-							<div class="col-10">
-								<Card border="warning">
-									<Card.Img variant="top" src={dog} height="200" />
-									<Card.Body>
-										<Card.Title>
-											<h5 align="center">Cuarto Paquete</h5>
-										</Card.Title>
-										<Card.Text>
-											Some quick example text to build on the card title and
-											make up the bulk of the card's content.
-										</Card.Text>
-										<Button variant="info" size="lg" block>
-											Informacion
-										</Button>
-									</Card.Body>
-								</Card>
-							</div>
-						</div>
-					</div>
-				</div>
-			</section>
-		</div>
-	);
-};
+class Home extends Component {
+	state = {
+		datos: []
+	};
+	componentDidMount = () => {
+		axios({
+			method: 'GET',
+			url: 'pet/'
+		})
+			.then(response => {
+				// console.log(response.data.data[0].subData.sexo);
+				// console.log(response.data.data);
+				this.datosHandler(response.data);
+			})
+			.catch(error => {
+				console.log('HUBO ERROR : ', error);
+			});
+		// console.log(this.datos);
+	};
+
+	datosHandler = recibido => {
+		this.setState({ datos: recibido.data });
+	};
+	render() {
+		const perros = this.state.datos.map((dato, i) => {
+			return (
+				<Carspet
+					name={dato.subData.petname}
+					sexo={dato.subData.sexo}
+					raza={dato.subData.raza}
+					descripcion={dato.subData.descripcion}
+					url={dato.subData.urlImage}
+					_id={dato.subData._id}
+				/>
+			);
+		});
+		return (
+			<div class="container-fluid">
+				<section>
+					<div class="row">{perros}</div>
+				</section>
+			</div>
+		);
+	}
+}
 
 export default Home;

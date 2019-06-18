@@ -13,22 +13,19 @@ import Logo from '../../Assets/Images/perroYara.jpg';
 const Header = props => {
 	return (
 		<Navbar bg="info" variant="dark" expand="lg">
-			<Navbar.Brand href="#home">
+			<Navbar.Brand href="/">
 				<Image src={Logo} width="90" height="70" roundedCircle />
 				{' Yara Can'}
 			</Navbar.Brand>
 			<Navbar.Toggle aria-controls="basic-navbar-nav" />
 			<Navbar.Collapse id="basic-navbar-nav">
-				<Nav className="mr-auto">
-					<Nav.Link href="#home">Inicio</Nav.Link>
-					<Nav.Link href="#link">Noticias</Nav.Link>
-					<Nav.Link href="#link">Albergues</Nav.Link>
-					<Nav.Link href="#link">Eventos</Nav.Link>
-					<Nav.Link href="#link">Reportar</Nav.Link>
-					<Nav.Link href="#link">Adoptar</Nav.Link>
-				</Nav>
+				<Nav className="mr-auto" />
 				<Nav>
-					<Nav.Link href="#link">Iniciar Sesion</Nav.Link>
+					<Nav.Link href="/">INICIO</Nav.Link>
+					<Nav.Link href="#link">NOTICIAS</Nav.Link>
+					<Nav.Link href="/albergues">ALBERGUES</Nav.Link>
+					<Nav.Link href="#link">EVENTOS</Nav.Link>
+					<Nav.Link href="/informacion">INFORMACION</Nav.Link>
 				</Nav>
 			</Navbar.Collapse>
 		</Navbar>

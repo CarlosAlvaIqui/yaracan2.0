@@ -97,10 +97,7 @@ export default class SignUp extends React.Component {
 	render() {
 		return (
 			<View style={{ flex: 1 }}>
-				<ImageBackground
-					source={imgBackground}
-					style={{ width: '100%', height: '100%' }}
-				>
+			
 					<ScrollView style={formStyles.container}>
 						<Text style={formStyles.subtitle}>Registro</Text>
 						<Input
@@ -140,7 +137,6 @@ export default class SignUp extends React.Component {
 							onPress={this.onSubmitHandler}
 						/>
 					</ScrollView>
-				</ImageBackground>
 			</View>
 		);
 	}
@@ -183,7 +179,6 @@ const formStyles = StyleSheet.create({
 		padding: 10
 	},
 	subtitle: {
-		color: '#fff',
 		fontSize: 40,
 		justifyContent: 'center',
 		alignItems: 'center',

@@ -2,6 +2,7 @@ import React from 'react';
 import {
 	View,
 	Text,
+	Image,
 	ImageBackground,
 	TouchableOpacity,
 	ToastAndroid,
@@ -17,6 +18,10 @@ import Icon from 'react-native-ionicons';
 import axios from '../../lib/axios';
 import AsyncStorage from '@react-native-community/async-storage';
 import { styles } from '../styles/global';
+import imglogo from '../../assets/img/logito.png';
+import loadingGif from '../../assets/img/loading.gif';
+
+
 export default class SignInScreen extends React.Component {
 	static navigationOptions = {
 		header: null
@@ -80,15 +85,21 @@ export default class SignInScreen extends React.Component {
 	defrente = () => {
 		this.props.navigation.navigate('header');
 	};
+	
 	render() {
 		return (
 			<View style={{ flex: 1 }}>
-				<ImageBackground
-					source={imgBackground}
-					style={{ width: '100%', height: '100%', opacity: 0.9 }}
-				>
+				
 					<ScrollView style={formStyles.container}>
-						<Text style={formStyles.subtitle}>Yara Can</Text>
+					<Image source={loadingGif} 
+					 style={{
+						
+						justifyContent: 'center',
+						alignItems: 'center',
+					
+					}}
+					 />
+
 						<Input
 							placeholder="  Nombre de usuario"
 							leftIcon={{ type: 'font-awesome', name: 'user' }}
@@ -104,11 +115,29 @@ export default class SignInScreen extends React.Component {
 							secureTextEntry={!this.state.showPassword}
 							onChangeText={text => this.inputHandler(text, 'password')}
 						/>
-						<Button
-							title="Iniciar Sesion"
-							containerStyle={formStyles.button}
+					
+						<TouchableOpacity
 							onPress={this.onSubmitHandler}
-						/>
+							style={{
+											marginTop: 30,
+											padding: 15,
+											justifyContent: 'center',
+											alignItems: 'center',
+											borderRadius: 25,
+											backgroundColor: '#cd853f'
+										}}
+									>
+										<Text
+											style={{
+												color: 'white',
+												fontSize: 20,
+												fontWeight: 'bold'
+											}}
+										>
+											Iniciar Sesion
+										</Text>
+									</TouchableOpacity>
+								
 						<View
 							style={{
 								marginTop: 10,
@@ -118,14 +147,14 @@ export default class SignInScreen extends React.Component {
 							}}
 						>
 							<Text
-								style={{ color: '#fff', fontSize: 18 }}
+								style={{  fontSize: 18 }}
 								style={formStyles.text}
+								onPress={this.defrente}
 							>
 								No tienes una cuenta?
 								<Text
 									onPress={this.registerHandler}
 									style={{
-										color: '#fff',
 										fontSize: 20,
 										fontWeight: 'bold'
 									}}
@@ -136,7 +165,6 @@ export default class SignInScreen extends React.Component {
 							</Text>
 						</View>
 					</ScrollView>
-				</ImageBackground>
 			</View>
 		);
 	}
@@ -145,19 +173,12 @@ const formStyles = StyleSheet.create({
 	container: {
 		padding: 10
 	},
-	subtitle: {
-		color: '#fff',
-		fontSize: 40,
-		justifyContent: 'center',
-		alignItems: 'center',
-		alignSelf: 'center'
-	},
 	input: {
 		marginTop: 60
 	},
 	text: {
-		marginTop: 180,
-		color: '#fff'
+		marginTop:40,
+		color:'#191919',
 	},
 	button: {
 		marginTop: 90

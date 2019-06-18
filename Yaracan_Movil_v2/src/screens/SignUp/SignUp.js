@@ -131,11 +131,27 @@ export default class SignUp extends React.Component {
 							secureTextEntry={!this.state.showPassword}
 							onChangeText={text => this.inputHandler(text, 'password')}
 						/>
-						<Button
-							title="Registrarse"
-							containerStyle={formStyles.button}
+						<TouchableOpacity
 							onPress={this.onSubmitHandler}
-						/>
+							style={{
+											marginTop: 30,
+											padding: 15,
+											justifyContent: 'center',
+											alignItems: 'center',
+											borderRadius: 25,
+											backgroundColor: '#cd853f'
+										}}
+									>
+										<Text
+											style={{
+												color: 'white',
+												fontSize: 20,
+												fontWeight: 'bold'
+											}}
+										>
+											Registrarse
+										</Text>
+						</TouchableOpacity>
 					</ScrollView>
 			</View>
 		);
@@ -182,10 +198,11 @@ const formStyles = StyleSheet.create({
 		fontSize: 40,
 		justifyContent: 'center',
 		alignItems: 'center',
-		alignSelf: 'center'
+		alignSelf: 'center',
+		color:'#191919',
 	},
 	input: {
-		marginTop: 35
+		marginTop: 20
 	},
 	button: {
 		marginTop: 10

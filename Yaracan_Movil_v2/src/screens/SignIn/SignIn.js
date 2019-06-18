@@ -88,17 +88,24 @@ export default class SignInScreen extends React.Component {
 	
 	render() {
 		return (
-			<View style={{ flex: 1 }}>
+			<View style={{ flex: 1}}>
 				
 					<ScrollView style={formStyles.container}>
-					<Image source={loadingGif} 
-					 style={{
-						
-						justifyContent: 'center',
-						alignItems: 'center',
-					
+					<TouchableOpacity
+				style={{ justifyContent: 'center', flexDirection: 'row' }}
+			>
+				<Image
+					source={require('../../assets/img/logito.png')}
+					style={{
+						resizeMode: 'contain',
+						width: 170,
+						height: 200,
+						marginLeft:80,
+						alignSelf: 'center'
 					}}
-					 />
+				/>
+				<Text style={{ color: 'white', marginTop: 10 }}>Back Home</Text>
+			</TouchableOpacity>
 
 						<Input
 							placeholder="  Nombre de usuario"
@@ -121,8 +128,7 @@ export default class SignInScreen extends React.Component {
 							style={{
 											marginTop: 30,
 											padding: 15,
-											justifyContent: 'center',
-											alignItems: 'center',
+											
 											borderRadius: 25,
 											backgroundColor: '#cd853f'
 										}}
@@ -136,7 +142,7 @@ export default class SignInScreen extends React.Component {
 										>
 											Iniciar Sesion
 										</Text>
-									</TouchableOpacity>
+						</TouchableOpacity>
 								
 						<View
 							style={{
@@ -160,7 +166,7 @@ export default class SignInScreen extends React.Component {
 									}}
 								>
 									{''}
-									Registrarse aquí!
+									Registrarses aquí!
 								</Text>
 							</Text>
 						</View>
@@ -174,13 +180,13 @@ const formStyles = StyleSheet.create({
 		padding: 10
 	},
 	input: {
-		marginTop: 60
+		marginTop: 20
 	},
 	text: {
 		marginTop:40,
 		color:'#191919',
 	},
 	button: {
-		marginTop: 90
+		marginTop: 130
 	}
 });

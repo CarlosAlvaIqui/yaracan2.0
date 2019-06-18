@@ -20,6 +20,16 @@ code {
 #footer a {
 	color: white;
 }
-#footer{
-  background: #17a2b8;
+#footer {
+	background: #17a2b8;
+}
+
+#main {
+	min-height: 77vh;
+}
+#main .carousel-inner img {
+	max-height: 85vh;
+	object-fit: cover;
+
+	/* max-height: 535px; */
 }

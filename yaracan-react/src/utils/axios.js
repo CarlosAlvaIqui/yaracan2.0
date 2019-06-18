@@ -1,8 +1,7 @@
 import axios from 'axios';
 
 const instance = axios.create({
-	baseURL: 'http://Api-env.mwtpjjfsp2.us-west-2.elasticbeanstalk.com'
+	baseURL: 'http://localhost:8080/api'
 });
 
 export default instance;
-/*192.168.43.168 */	 

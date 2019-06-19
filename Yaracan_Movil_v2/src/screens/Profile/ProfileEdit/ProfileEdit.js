@@ -49,7 +49,7 @@ class ProfileEdit extends Component {
 		userId: null,
 		userName: '',
 		userEmail: '',
-		userPassword: '',
+		userNumber: '',
 		picture: ''
 	};
 	static navigationsOptions = {
@@ -58,7 +58,7 @@ class ProfileEdit extends Component {
 	componentDidMount = async () => {
 		const userName = await AsyncStorage.getItem('userName');
 		const userEmail = await AsyncStorage.getItem('userEmail');
-		const userPassword = await AsyncStorage.getItem('userEmail');
+		const userNumber = await AsyncStorage.getItem('userEmail');
 		this.setState({
 			userName: userName,
 			userEmail: userEmail
@@ -107,10 +107,9 @@ class ProfileEdit extends Component {
 				/>
 				<Input
 					placeholder="Telefono"
-					leftIcon={{ type: 'font-awesome', name: 'key' }}
+					leftIcon={{ type: 'font-awesome', name: 'phone' }}
 					inputContainerStyle={formStyles.input}
-					value={this.state.userEmail}
-					onChangeText={text => this.inputHandler(text, 'userEmail')}
+					onChangeText={text => this.inputHandler(text, 'number')}
 				/>
 				<TouchableOpacity
 							onPress={this.cambiachange}

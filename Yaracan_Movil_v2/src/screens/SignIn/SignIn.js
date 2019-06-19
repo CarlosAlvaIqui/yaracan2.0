@@ -128,9 +128,12 @@ export default class SignInScreen extends React.Component {
 							style={{
 											marginTop: 30,
 											padding: 15,
-											
+											justifyContent: 'center',
+											alignItems: 'center',
 											borderRadius: 25,
-											backgroundColor: '#cd853f'
+											backgroundColor: '#cd853f',
+											width:200,
+											marginLeft:80
 										}}
 									>
 										<Text
@@ -157,7 +160,7 @@ export default class SignInScreen extends React.Component {
 								style={formStyles.text}
 								onPress={this.defrente}
 							>
-								No tienes una cuenta?
+								No tienes una cuenta? 
 								<Text
 									onPress={this.registerHandler}
 									style={{
@@ -166,7 +169,7 @@ export default class SignInScreen extends React.Component {
 									}}
 								>
 									{''}
-									Registrarses aquí!
+									 Registrarse aquí!
 								</Text>
 							</Text>
 						</View>

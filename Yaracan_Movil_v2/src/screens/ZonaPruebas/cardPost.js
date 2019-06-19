@@ -19,7 +19,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 export default class Posts extends Component {
 	static navigationOptions = {
 		tabBarIcon: ({ focused, horizontal, tintColor }) => {
-			return <Ionicons name="ios-notifications" size={25} color={tintColor} />;
+			return <Ionicons name="ios-paper" size={25} color={'white'} />;
 		}
 	};
 	constructor(props) {

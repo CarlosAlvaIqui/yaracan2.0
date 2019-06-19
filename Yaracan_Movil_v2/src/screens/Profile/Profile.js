@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ScrollView, Image, View, Text } from 'react-native';
+import { ScrollView, Image, View, Text,TouchableOpacity } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 
 import { styles } from '../../screens/styles/global';
@@ -13,7 +13,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 class Profile extends Component {
 	static navigationOptions = {
 		tabBarIcon: ({ focused, horizontal, tintColor }) => {
-			return <Ionicons name="ios-person" size={25} color={tintColor} />;
+			return <Ionicons name="ios-person" size={25} color={'white'} />;
 		}
 	};
 	state = {
@@ -34,7 +34,9 @@ class Profile extends Component {
 	editProfileHandler = () => {
 		this.props.navigation.navigate('ProfileEdit');
 	};
-
+	gotosingin = () => {
+		this.props.navigation.navigate('Auth');
+	};
 	render() {
 		return (
 			<ScrollView>
@@ -55,6 +57,29 @@ class Profile extends Component {
 						onPress={this.editProfileHandler}
 					/>
 				</View>
+				<TouchableOpacity
+							onPress={this.gotosingin}
+							style={{
+											marginTop: 30,
+											padding: 15,
+											justifyContent: 'center',
+											alignItems: 'center',
+											borderRadius: 25,
+											backgroundColor: '#cd853f',
+											width:150,
+											marginLeft:100
+										}}
+									>
+										<Text
+											style={{
+												color: 'white',
+												fontSize: 20,
+												fontWeight: 'bold'
+											}}
+										>
+											Salir
+										</Text>
+						</TouchableOpacity>
 			</ScrollView>
 		);
 	}

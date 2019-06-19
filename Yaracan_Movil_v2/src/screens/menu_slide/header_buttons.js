@@ -32,15 +32,20 @@ const Mi_top_bar = createMaterialTopTabNavigator(
 		Sing4: {
 			screen: profile,
 			navigationOptions: { header: null }
-		}
+		},
+	
 	},
 	{
 		tabBarPosition: 'top',
 		tabBarOptions: {
 			activeTintColor: '#0084ff',
 			showIcon: true,
-			showLabel: false
-		}
+			showLabel: false,	
+			style: {
+				backgroundColor: '#cd853f',
+				color: '#fff'
+			  },
+		},
 	}
 );
 

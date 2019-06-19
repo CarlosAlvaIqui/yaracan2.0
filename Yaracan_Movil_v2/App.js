@@ -55,7 +55,7 @@ export default createAppContainer(
 			App: AppStack,
 			Auth: AuthStack,
 			header: headerNavigation,
-			Alert: Alert
+			Alert: Alert,
 		},
 		{
 			initialRouteName: 'AuthLoading'

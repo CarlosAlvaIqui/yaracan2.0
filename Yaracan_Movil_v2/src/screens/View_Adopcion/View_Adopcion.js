@@ -9,7 +9,8 @@ import {
 	ToastAndroid,
 	Image,
 	Platform,
-	ScrollView
+	ScrollView,
+	ActivityIndicator
 } from 'react-native';
 import Icon from 'react-native-ionicons';
 import { Madoka } from 'react-native-textinput-effects';
@@ -41,7 +42,7 @@ window.Blob = Blob;
 export default class View_Adopcion extends React.Component {
 	static navigationOptions = {
 		tabBarIcon: ({ focused, horizontal, tintColor }) => {
-			return <Ionicons name="ios-clipboard" size={25} color={tintColor} />;
+			return <Ionicons name="ios-paw" size={25} color={'white'} />;
 		}
 	};
 	constructor() {
@@ -230,7 +231,8 @@ export default class View_Adopcion extends React.Component {
 								textAlign: 'center',
 								fontWeight: 'bold',
 								fontSize: 26,
-								color: 'black'
+								color: 'black',
+								marginTop: 10
 							}}
 						>
 							Registros
@@ -276,7 +278,6 @@ export default class View_Adopcion extends React.Component {
 										style={{
 											justifyContent: 'center',
 											alignItems: 'center',
-											backgroundColor: 'white'
 										}}
 									>
 										<Text
@@ -315,7 +316,9 @@ export default class View_Adopcion extends React.Component {
 											justifyContent: 'center',
 											alignItems: 'center',
 											borderRadius: 25,
-											backgroundColor: '#81CDF3'
+											backgroundColor: '#cd853f',
+											width:150,
+											marginLeft:100
 										}}
 									>
 										<Text
@@ -327,6 +330,7 @@ export default class View_Adopcion extends React.Component {
 										>
 											Publicar
 										</Text>
+										
 									</TouchableOpacity>
 								</View>
 							</View>

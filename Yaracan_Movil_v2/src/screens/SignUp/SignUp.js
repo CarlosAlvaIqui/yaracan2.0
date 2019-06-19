@@ -8,8 +8,6 @@ import {
 	ToastAndroid,
 	ScrollView
 } from 'react-native';
-import Icon from 'react-native-ionicons';
-import { Hoshi } from 'react-native-textinput-effects';
 import { Input, Button } from 'react-native-elements';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import AsyncStorage from '@react-native-community/async-storage';
@@ -27,6 +25,7 @@ export default class SignUp extends React.Component {
 	state = {
 		username: '',
 		password: '',
+		repassword:'',
 		loading: false,
 		showPassword: false,
 		email: ''
@@ -109,7 +108,7 @@ export default class SignUp extends React.Component {
 						/>
 						<Input
 							placeholder=" Email "
-							leftIcon={{ type: 'font-awesome', name: 'user' }}
+							leftIcon={{ type: 'font-awesome', name: 'envelope' }}
 							inputContainerStyle={formStyles.input}
 							value={this.state.email}
 							onChangeText={text => this.inputHandler('email', text)}
@@ -124,12 +123,12 @@ export default class SignUp extends React.Component {
 						/>
 
 						<Input
-							placeholder="contraseña"
+							placeholder="repita su contraseña"
 							leftIcon={{ type: 'font-awesome', name: 'key' }}
 							inputContainerStyle={formStyles.input}
-							value={this.state.password}
+							value={this.state.repassword}
 							secureTextEntry={!this.state.showPassword}
-							onChangeText={text => this.inputHandler(text, 'password')}
+							onChangeText={text => this.inputHandler( 'repassword',text)}
 						/>
 						<TouchableOpacity
 							onPress={this.onSubmitHandler}
@@ -139,7 +138,9 @@ export default class SignUp extends React.Component {
 											justifyContent: 'center',
 											alignItems: 'center',
 											borderRadius: 25,
-											backgroundColor: '#cd853f'
+											backgroundColor: '#cd853f',
+											width:150,
+											marginLeft:100
 										}}
 									>
 										<Text

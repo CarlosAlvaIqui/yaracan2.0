@@ -177,12 +177,7 @@ export default class View_Adopcion extends React.Component {
 						raza: this.state.raza,
 						descripcion: this.state.descripcion,
 						urlImage: this.state.urlImagePet,
-						userPost: [
-							{
-								userName: this.state.userName,
-								emailUser: this.state.userEmail
-							}
-						]
+						user_id: 1
 					}
 				})
 					.then(() => {
@@ -277,7 +272,7 @@ export default class View_Adopcion extends React.Component {
 										onPress={this.getImage}
 										style={{
 											justifyContent: 'center',
-											alignItems: 'center',
+											alignItems: 'center'
 										}}
 									>
 										<Text
@@ -317,8 +312,8 @@ export default class View_Adopcion extends React.Component {
 											alignItems: 'center',
 											borderRadius: 25,
 											backgroundColor: '#cd853f',
-											width:150,
-											marginLeft:100
+											width: 150,
+											marginLeft: 100
 										}}
 									>
 										<Text
@@ -330,7 +325,6 @@ export default class View_Adopcion extends React.Component {
 										>
 											Publicar
 										</Text>
-										
 									</TouchableOpacity>
 								</View>
 							</View>

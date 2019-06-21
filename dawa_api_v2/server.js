@@ -41,12 +41,14 @@ router.use('/pet', petRouter);
 app.use('/api', router);
 
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost:27017/dawa_blog');
+mongoose.connect(
+	'mongodb+srv://josechullo:avatec17@yaracan-r7gix.mongodb.net/dawa_blog?retryWrites=true&w=majority'
+);
 mongoose.Promise = global.Promise;
 
 server.listen(port);
 console.log('La magia sucede en el puerto ' + port);
-
+console.log('@');
 io.on('connection', function(socket) {
 	console.log('Conectado');
 	socket.on('message', message => {
